@@ -14,10 +14,10 @@ body {
   overflow: hidden;
   position: relative;
   background-color: black;
-  background-image: url("https://raw.githubusercontent.com/rainner/codepen-assets/master/images/pinkish_sunset.jpg");
+  background-image: url("https://airbus-h.assetsadobe2.com/is/image/content/dam/channel-specific/website-/products-and-services/space/space-equipment/web.space.spaceequipment.stage.jpg?wid=1920&fit=fit,1&qlt=85,0");
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: 170vh;
+  background-size: cover;
   font-family: 'Denk One', Arial, sans-serif;
   font-weight: normal;
   font-size: 18px;

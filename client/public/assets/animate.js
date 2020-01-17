@@ -1,7 +1,7 @@
 /**
  * Common options
  */
-let cycleColor  = false;  // cycle colors 
+let cycleColor  = true;  // cycle colors 
 let commonHue   = 0.038;  // initial color 
 let commonColor = new THREE.Color();
 commonColor.setHSL( commonHue, .8, .5 );
@@ -127,7 +127,7 @@ const shootingStar = {
   this.scene = scene; 
   let geometry = new THREE.CylinderGeometry( 0, 2, 120, 10 );
   let material = new THREE.MeshBasicMaterial({
-   color: 0xffffcc,
+   color: 0xFFFcc,
    opacity: .4,
    blending: THREE.AdditiveBlending,
    side: THREE.FrontSide,
@@ -240,7 +240,7 @@ const mountains = {
   texture.wrapS = THREE.RepeatWrapping;
   
   let material  = new THREE.MeshPhongMaterial({
-   color: 0xffffff,
+   color: 0x0000FF,
    opacity: 1,
    map: texture, 
    blending: THREE.NoBlending,
@@ -250,10 +250,10 @@ const mountains = {
   });
   
   let terrain = new THREE.Mesh( this.geometry, material );
-  terrain.position.set( 0, -500, -3000 );
-  terrain.rotation.x = ( Math.PI / 2 ) + 1.35;
-  
-  let light = new THREE.PointLight( 0xffffff, 8, 5500 );
+  terrain.position.set( 0, -800, -4000 );
+  terrain.rotation.x = ( Math.PI / 2 ) + 0.35;
+
+  let light = new THREE.PointLight( 0x0000FF, 8, 5500 );
   light.position.set( 0, 1200, -3500 );
   light.castShadow = false;
   light.color = commonColor;
@@ -309,7 +309,7 @@ const groundPlain = {
   this.group.position.set( this.move.x, this.move.y, this.move.z );
   this.group.rotation.set( this.look.x, this.look.y, this.look.z );
   
-  this.geometry = new THREE.PlaneGeometry( 4000, 2000, 128, 64 ); 
+  this.geometry = new THREE.PlaneGeometry( 8000, 6000, 500, 400 ); 
   this.material = new THREE.MeshLambertMaterial({
    color: 0xffffff,
    opacity: 1,
@@ -373,7 +373,7 @@ const gunShip = {
   this.group.rotation.set( this.look.x, this.look.y, this.look.z );
   
   let material = new THREE.MeshPhongMaterial({
-   color: 0xffffff,
+   color: 0xfe019a,
    blending: THREE.NoBlending,
    side: THREE.FrontSide,
    transparent: false,
@@ -381,7 +381,7 @@ const gunShip = {
    wireframe: false, 
   });
   
-  let light = new THREE.PointLight( 0xffffff, .4, 600 );
+  let light = new THREE.PointLight( 0xffffff, 1.5, 700 );
   light.position.set( 0, 0, 600 );
   
   let ship = LoaderHelper.get( 'shipGeometry' );
@@ -406,7 +406,7 @@ const gunShip = {
   this.engineTexture.wrapS = THREE.RepeatWrapping;
   
   let material = new THREE.MeshBasicMaterial({
-   color: 0x0099ff,
+   color: 0xfe019a,
    opacity: 1,
    alphaMap: this.engineTexture,
    blending: THREE.AdditiveBlending,
