@@ -268,11 +268,9 @@ TryClearFuckingInterval(interval){
     return (
       <div>
         <ToastContainer></ToastContainer>
-        <div >
-            <a href="http://localhost:8888">
-              <button>Login with spotify</button>
-            </a>
-          </div>
+        <section class="player" id="player">
+ 
+        </section>
 
         <div className="buttombar">
             <img src={this.state.nowPlaying.image} style={{width: 120}}/>

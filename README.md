@@ -3,5 +3,6 @@
 ## yarn start
 
 # auth-server
+## cd auth-server
+## npm build
 ## npm install
-## node authorization_code/app.js
