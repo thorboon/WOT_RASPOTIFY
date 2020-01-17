@@ -1,5 +1,7 @@
-# WOT_RASPOTIFY
-Spotify op een RaspberryPi. 
-Gelinkt aan arcade knoppen.
+# client -> react
+## yarn install
+## yarn start
 
-Project van: Thor Boonaert, Indy Meersman, Quinten Leysen
+# auth-server
+## npm install
+## node authorization_code/app.js
