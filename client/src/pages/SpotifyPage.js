@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css';
+import * as $ from "jquery";
 import Spotify from 'spotify-web-api-js'
 import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -29,6 +30,9 @@ class SpotifyPage extends Component {
         
         progress: 0,
       },
+      name:'',
+      is_playing: false,
+      progress_ms: 0,
       percentage: 90,
       volume: 0,
       skipe: false,
@@ -38,10 +42,15 @@ class SpotifyPage extends Component {
     }
   }
   componentWillMount(){
-    this.getNowPlaying()
-    console.log('willmount')
+    //this.getNowPlaying()
+    
   }
   componentDidMount(){
+        // Call this function so that it fetch first time right after mounting the component
+        this.getNowPlaying()
+
+        // set Interval
+        this.interval = setInterval(this.getNowPlaying, 1500);
   }
   getHashParams() {
     
@@ -54,31 +63,43 @@ class SpotifyPage extends Component {
     return hashParams;
   }
   getNowPlaying(){
-    console.log(this.state.loggedIn)
+    //console.log(this.state.loggedIn)
     spotifyWebApi.getMyCurrentPlaybackState()
     .then((response) => {
       console.log(response)
-      this.setState({
-        nowPlaying: {
-          name: response.item.name,
-          image: response.item.album.images[0].url,
-          artist: response.item.artists[0].name,
-          playing: response.is_playing,
-          duration: response.item.duration_ms,
-          
-          progress: response.progress_ms
-        },
-        volume: response.device.volume_percent,
-        skip: false,
-      })
-      this.getPercentage(this.state.nowPlaying.duration, this.state.nowPlaying.progress)
+      console.log(response.is_playing)
+      if(!response.is_playing){
+        console.log('pauzed')
+        this.setState({
+          is_playing: false
+        })
+        this.pauzeSong()
+      }else{
+        this.setState({
+          nowPlaying: {
+            name: response.item.name,
+            image: response.item.album.images[0].url,
+            artist: response.item.artists[0].name,
+            playing: response.is_playing,
+            duration: response.item.duration_ms,
+            progress: response.progress_ms
+          },
+          volume: response.device.volume_percent,
+          skip: false,
+          is_playing: true,
+        })
+      }
+
+      //this.getPercentage(this.state.nowPlaying.duration, this.state.nowPlaying.progress)
     }).catch((error)=> {
-      toast.error("Seems like you're not playing anything!", {
+      /*toast.error("Seems like you're not playing anything!", {
         position: toast.POSITION.BOTTOM_CENTER
-      })
+      })*/
     })
+    
   }
 
+/*
   getPercentage(noemer,teller){
     let percent = teller * 100 / noemer
     this.setState({
@@ -140,7 +161,7 @@ TryClearFuckingInterval(interval){
       percentage: newpercent
     })
   }
-
+*/
   skipSong(){
     console.log(this.state.loggedIn)
     spotifyWebApi.skipToNext()
@@ -185,11 +206,11 @@ TryClearFuckingInterval(interval){
     spotifyWebApi.pause()
     .then((respone) => {
       this.setState({
-        nowPlaying: {
-          playing: false
-        }
+          is_playing: false
+
       })
-      console.log(this.state.nowPlaying.playing)
+      
+      console.log('state playing',this.state.is_playing)
       //this.getNowPlaying()
     })
   }
@@ -282,15 +303,14 @@ TryClearFuckingInterval(interval){
         <VolumeUpIcon />
         </IconButton>
         </div>
-        <ProgressBar percentage= {this.state.percentage}>
-        </ProgressBar>
+
       </div>
       </div>
     );
   }
 
 }
-
+/*
 const ProgressBar = (props) => {
   return (
       <div className="Progressbar">
@@ -303,4 +323,5 @@ const Filler = (props) => {
       <div className="Thumb" style={{ width: `${props.percentage}%`}}></div>
   )
 }
+*/
 export default SpotifyPage;
