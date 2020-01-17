@@ -215,7 +215,7 @@ const starField = {
 /**
  * Mountains object
  */
-const mountains = {
+/*const mountains = {
  group: null, 
  simplex: null,
  geometry: null, 
@@ -284,7 +284,7 @@ const mountains = {
   addEase( this.group.rotation, this.look, this.ease );
  }, 
 };
-
+*/
 
 /**
  * Ground object
@@ -297,7 +297,7 @@ const groundPlain = {
  simplex: null,
  factor: 300, // smoothness 
  scale: 30, // terrain size
- speed: 0.015, // move speed 
+ speed: 0.002, // move speed 
  cycle: 0, 
  ease: 12, 
  move: { x: 0, y: -300, z: -1000 },
@@ -309,7 +309,7 @@ const groundPlain = {
   this.group.position.set( this.move.x, this.move.y, this.move.z );
   this.group.rotation.set( this.look.x, this.look.y, this.look.z );
   
-  this.geometry = new THREE.PlaneGeometry( 8000, 6000, 500, 400 ); 
+  this.geometry = new THREE.PlaneGeometry( 6000, 4000, 200, 50 ); 
   this.material = new THREE.MeshLambertMaterial({
    color: 0xffffff,
    opacity: 1,
@@ -529,7 +529,7 @@ const setupScene = () => {
  
  // setup objects 
  starField.create( scene ); 
- mountains.create( scene ); 
+ //mountains.create( scene ); 
  groundPlain.create( scene ); 
  gunShip.create( scene ); 
  
@@ -573,7 +573,7 @@ const setupScene = () => {
   // update objects 
   shootingStar.update( mouse );
   starField.update( mouse ); 
-  mountains.update( mouse ); 
+  //mountains.update( mouse ); 
   groundPlain.update( mouse ); 
   gunShip.update( mouse ); 
   
@@ -587,6 +587,6 @@ const setupScene = () => {
 // init 
 LoaderHelper.onReady( setupScene );
 LoaderHelper.loadTexture( 'starTexture', 'images/star.png' ); 
-LoaderHelper.loadTexture( 'mountainTexture', 'images/terrain2.jpg' ); 
+//LoaderHelper.loadTexture( 'mountainTexture', 'images/terrain2.jpg' ); 
 LoaderHelper.loadTexture( 'engineTexture', 'images/water.jpg' ); 
 LoaderHelper.loadGeometry( 'shipGeometry', 'models/SpaceFighter03/SpaceFighter03.obj' ); 
