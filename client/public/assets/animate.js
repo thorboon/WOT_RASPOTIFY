@@ -117,6 +117,7 @@ const addEase = ( pos, to, ease ) => {
 /**
  * Shooting star object 
  */
+/*
 const shootingStar = {
  scene: null, 
  stars: [], 
@@ -158,10 +159,11 @@ const shootingStar = {
  },
 };
 
-
+*/
 /**
  * Starfield object 
  */
+/*
 const starField = {
  group: null, 
  total: 400, 
@@ -211,7 +213,7 @@ const starField = {
  }, 
 }; 
 
-
+*/
 /**
  * Mountains object
  */
@@ -355,6 +357,7 @@ const groundPlain = {
 /**
  * Ship object
  */
+/*
 const gunShip = {
  scene: null, 
  group: null,
@@ -491,7 +494,7 @@ const gunShip = {
  },
 };
 
-
+*/
 /**
  * Setup scene 
  */
@@ -528,10 +531,10 @@ const setupScene = () => {
  scene.add( light ); 
  
  // setup objects 
- starField.create( scene ); 
+ //starField.create( scene ); 
  //mountains.create( scene ); 
  groundPlain.create( scene ); 
- gunShip.create( scene ); 
+ //gunShip.create( scene ); 
  
  // on page resize
  window.addEventListener( 'resize', e => {
@@ -545,7 +548,7 @@ const setupScene = () => {
   mouse.x = deviceInfo.mouseCenterX( e ); 
   mouse.y = deviceInfo.mouseCenterY( e ); 
  });
-
+/*
  // on mouse wheel
  window.addEventListener( 'wheel', e => {
   gunShip.onScroll( e ); 
@@ -555,7 +558,7 @@ const setupScene = () => {
  window.addEventListener( 'click', e => {
   gunShip.onClick( e ); 
  });
- 
+ */
 
  // animation loop 
  const loop = () => {
@@ -571,11 +574,11 @@ const setupScene = () => {
    commonColor.setHSL( commonHue, .8, .5 );
   }
   // update objects 
-  shootingStar.update( mouse );
-  starField.update( mouse ); 
+  //shootingStar.update( mouse );
+  //starField.update( mouse ); 
   //mountains.update( mouse ); 
   groundPlain.update( mouse ); 
-  gunShip.update( mouse ); 
+  //gunShip.update( mouse ); 
   
   // render scene 
   renderer.render( scene, camera );
