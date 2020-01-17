@@ -24,35 +24,66 @@ GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
-def button_callback(channel):
-   keyboard.press(">")
-   keyboard.release(">")
-   print('gay')
+def upbutton_callback(channel):
+   keyboard.press("z")
+   keyboard.release("z")
+   print('up')
     
-def button2_callback(channel):
-    keyboard.press("+")
-    keyboard.release("+")
+def downbutton_callback(channel):
+    keyboard.press("s")
+    keyboard.release("s")
+    print('down')
     
-def button3_callback(channel):
-    keyboard.press("a")
-    keyboard.release("a")
-    print('quinten')
-
-def button4_callback(channel):
+def leftbutton_callback(channel):
     keyboard.press("q")
     keyboard.release("q")
-    print('quinten')
+    print('left')
 
-GPIO.add_event_detect(19, GPIO.RISING, callback=button_callback, bouncetime=500)
-GPIO.add_event_detect(11, GPIO.RISING, callback=button3_callback, bouncetime=500)
-GPIO.add_event_detect(13, GPIO.RISING, callback=button2_callback, bouncetime=500)
-GPIO.add_event_detect(9, GPIO.RISING, callback=button4_callback, bouncetime=500)
-GPIO.add_event_detect(23, GPIO.RISING, callback=button_callback, bouncetime=500)
-GPIO.add_event_detect(24, GPIO.RISING, callback=button2_callback, bouncetime=500)
-GPIO.add_event_detect(25, GPIO.RISING, callback=button3_callback, bouncetime=500)
-GPIO.add_event_detect(7, GPIO.RISING, callback=button3_callback, bouncetime=500)
-GPIO.add_event_detect(18, GPIO.RISING, callback=button3_callback, bouncetime=500)
-GPIO.add_event_detect(8, GPIO.RISING, callback=button3_callback, bouncetime=500)
+def rightbutton_callback(channel):
+    keyboard.press("d")
+    keyboard.release("d")
+    print('right')
+    
+def enterbutton_callback(channel):
+    keyboard.press("a")
+    keyboard.release("a")
+    print('enter')
+
+def playbutton_callback(channel):
+    keyboard.press("e")
+    keyboard.release("e")
+    print('play')
+
+def louderbutton_callback(channel):
+    keyboard.press("r")
+    keyboard.release("r")
+    print('louder')
+
+def quietbutton_callback(channel):
+    keyboard.press("t")
+    keyboard.release("t")
+    print('quiet')
+    
+def nextbutton_callback(channel):
+    keyboard.press("y")
+    keyboard.release("y")
+    print('next')   
+
+def prevbutton_callback(channel):
+    keyboard.press("u")
+    keyboard.release("u")
+    print('prev')   
+          
+GPIO.add_event_detect(19, GPIO.RISING, callback=upbutton_callback, bouncetime=500)
+GPIO.add_event_detect(11, GPIO.RISING, callback=downbutton_callback, bouncetime=500)
+GPIO.add_event_detect(13, GPIO.RISING, callback=leftbutton_callback, bouncetime=500)
+GPIO.add_event_detect(9, GPIO.RISING, callback=rightbutton_callback, bouncetime=500)
+GPIO.add_event_detect(23, GPIO.RISING, callback=enterbutton_callback, bouncetime=500)
+GPIO.add_event_detect(24, GPIO.RISING, callback=playbutton_callback, bouncetime=500)
+GPIO.add_event_detect(25, GPIO.RISING, callback=louderbutton_callback, bouncetime=500)
+GPIO.add_event_detect(7, GPIO.RISING, callback=quietbutton_callback, bouncetime=500)
+GPIO.add_event_detect(18, GPIO.RISING, callback=nextbutton_callback, bouncetime=500)
+GPIO.add_event_detect(8, GPIO.RISING, callback=prevbutton_callback, bouncetime=500)
 
 message = input("Press enter to quitbegay")
 
