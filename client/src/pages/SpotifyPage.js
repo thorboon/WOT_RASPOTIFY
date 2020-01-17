@@ -22,9 +22,9 @@ class SpotifyPage extends Component {
     this.state = {
       loggedIn: params.access_token ? true : false,
       nowPlaying: {
-        name: 'Not Checked',
+        name: 'Play a song!',
         image: '',
-        artist: 'Not Checked',
+        artist: '',
         playing: false,
         duration: 0,
         
@@ -35,6 +35,7 @@ class SpotifyPage extends Component {
       progress_ms: 0,
       percentage: 90,
       volume: 0,
+      gotsong: false,
       skipe: false,
     }
     if (true){
@@ -84,6 +85,7 @@ class SpotifyPage extends Component {
           },
           volume: response.device.volume_percent,
           skip: false,
+          gotsong: true,
           is_playing: true,
         })
         console.log('this.setstte', this.state.is_playing)
@@ -273,6 +275,8 @@ TryClearFuckingInterval(interval){
         </section>
 
         <div className="buttombar">
+        <h1 className={this.state.gotsong ? 'hidden' : ''}>Play a song on any device!</h1>
+        <div className={this.state.gotsong ? '' : 'hidden'}>
             <img src={this.state.nowPlaying.image} style={{width: 120}}/>
           <h1>
           {this.state.nowPlaying.name.toUpperCase()}
@@ -305,7 +309,7 @@ TryClearFuckingInterval(interval){
         <VolumeUpIcon />
         </IconButton>
         
-
+        </div>
       </div>
       <KeyboardEventHandler handleKeys={['space']} onKeyEvent={(key) => this.playorpause()} />
       <KeyboardEventHandler handleKeys={['up']} onKeyEvent={(key) => this.setLouder()} />
