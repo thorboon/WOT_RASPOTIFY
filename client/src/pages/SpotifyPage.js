@@ -275,47 +275,38 @@ TryClearFuckingInterval(interval){
           </div>
 
         <div className="buttombar">
-        <div className="imagetrack">
-          <img src={this.state.nowPlaying.image} style={{width : 80}} />
-        </div>
-        <div className="titles">
-          <h3>
-          {this.state.nowPlaying.name}
-          </h3>
-          <h4>
-          {this.state.nowPlaying.artist}
-          </h4>
-        </div>
-        <div className="controlButtons">
+            <img src={this.state.nowPlaying.image} style={{width: 120}}/>
+          <h1>
+          {this.state.nowPlaying.name.toUpperCase()}
+          </h1>
+          <h1>
+          {this.state.nowPlaying.artist.toUpperCase()}
+          </h1>
 
-        <IconButton color="secondary" onClick={()=> this.prevSong()} >
+        <IconButton style={{color: 'white'}} onClick={()=> this.prevSong()} >
         <SkipePrevIcon />
         </IconButton>
         <div className={this.state.is_playing ? 'hidden' : 'playsongs'}>
-        <IconButton color="secondary" onClick={()=> this.playSong()} >
+        <IconButton style={{color: 'white'}} onClick={()=> this.playSong()} >
         <PlayIcon />
         </IconButton>
         </div>
         <div className={this.state.is_playing ? 'playsongs' : 'hidden'}>
-        <IconButton color="secondary" onClick={()=> this.pauseSong()} >
-        <PauseIcon />
+        <IconButton  style={{color: 'white'}} onClick={()=> this.pauseSong()} >
+        <PauseIcon/>
         </IconButton>
         </div>
-        <IconButton color="secondary" onClick={()=> this.skipSong()} >
+        <IconButton style={{color: 'white'}} onClick={()=> this.skipSong()} >
         <SkipeNextIcon />
         </IconButton>
-
-        
-
-        </div>
-        <div className="soundButtons">
-        <IconButton color="secondary" onClick={()=> this.setQuiet()}>
+      
+        <IconButton style={{color: 'white'}} onClick={()=> this.setQuiet()}>
         <VolumeDownIcon />
         </IconButton>
-        <IconButton color="secondary" onClick={()=> this.setLouder()}>
+        <IconButton style={{color: 'white'}} onClick={()=> this.setLouder()}>
         <VolumeUpIcon />
         </IconButton>
-        </div>
+        
 
       </div>
       <KeyboardEventHandler handleKeys={['space']} onKeyEvent={(key) => this.playorpause()} />
