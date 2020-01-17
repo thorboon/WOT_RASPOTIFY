@@ -206,7 +206,7 @@ TryClearFuckingInterval(interval){
           volume: volume,
         
       })
-      this.getNowPlaying()
+     
     })
   }
 
@@ -222,7 +222,7 @@ TryClearFuckingInterval(interval){
       this.setState({
           volume: volume,  
       })
-      this.getNowPlaying()
+      
     })
   }
 
