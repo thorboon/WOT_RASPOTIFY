@@ -41,10 +41,6 @@ class SpotifyPage extends Component {
       spotifyWebApi.setAccessToken(params.access_token)
     }
   }
-  componentWillMount(){
-    //this.getNowPlaying()
-    
-  }
   componentDidMount(){
         // Call this function so that it fetch first time right after mounting the component
         this.getNowPlaying()
@@ -52,8 +48,7 @@ class SpotifyPage extends Component {
         // set Interval
         this.interval = setInterval(this.getNowPlaying, 1500);
   }
-  getHashParams() {
-    
+  getHashParams = () => {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
         q = window.location.hash.substring(1);
@@ -62,18 +57,15 @@ class SpotifyPage extends Component {
     }
     return hashParams;
   }
-  getNowPlaying(){
-    //console.log(this.state.loggedIn)
+  getNowPlaying = () => {
     spotifyWebApi.getMyCurrentPlaybackState()
     .then((response) => {
-      console.log(response)
-      console.log(response.is_playing)
+      //console.log(response)
+      console.log('song is playing?',response.is_playing)
+      // if song is paused
       if(!response.is_playing){
-        console.log('pauzed')
-        this.setState({
-          is_playing: false
-        })
-        this.pauzeSong()
+        console.log('song is pauzed')
+        this.pauseSong()
       }else{
         this.setState({
           nowPlaying: {
@@ -88,10 +80,12 @@ class SpotifyPage extends Component {
           skip: false,
           is_playing: true,
         })
+        console.log('this.setstte', this.state.is_playing)
       }
 
       //this.getPercentage(this.state.nowPlaying.duration, this.state.nowPlaying.progress)
     }).catch((error)=> {
+      console.log(error)
       /*toast.error("Seems like you're not playing anything!", {
         position: toast.POSITION.BOTTOM_CENTER
       })*/
@@ -162,7 +156,7 @@ TryClearFuckingInterval(interval){
     })
   }
 */
-  skipSong(){
+  skipSong = () => {
     console.log(this.state.loggedIn)
     spotifyWebApi.skipToNext()
     .then((response) => {
@@ -178,7 +172,7 @@ TryClearFuckingInterval(interval){
     })
   }
 
-  prevSong(){
+  prevSong = () =>{
     spotifyWebApi.skipToPrevious()
     .then((response) => {
       console.log(response)
@@ -194,7 +188,7 @@ TryClearFuckingInterval(interval){
     })
   }
 
-  playSong(){
+  playSong = () =>{
     spotifyWebApi.play()
     .then((respone) => {
       this.getNowPlaying()
@@ -202,20 +196,26 @@ TryClearFuckingInterval(interval){
     console.log(this.state.nowPlaying.playing)
   }
 
-  pauseSong(){
-    spotifyWebApi.pause()
-    .then((respone) => {
-      this.setState({
-          is_playing: false
-
+  pauseSong = () => {
+    console.log('pause function')
+    //console.log('state pause', this.state.is_playing)
+    if(this.state.is_playing){
+      spotifyWebApi.pause()
+      .then(
+        this.setState({
+            is_playing: false
+        }), 
+        console.log('state playing',this.state.is_playing)
+        //this.getNowPlaying()
+      ).catch((error) => {
+        console.log(error)
       })
-      
-      console.log('state playing',this.state.is_playing)
-      //this.getNowPlaying()
-    })
+    }else{
+      console.log('already paused')
+    }
   }
 
-  setLouder(){
+  setLouder =() => {
     console.log(this.state.volume)
     let volume = this.state.volume + 10
     if(volume > 100){
@@ -278,13 +278,13 @@ TryClearFuckingInterval(interval){
         <IconButton color="secondary" onClick={()=> this.prevSong()} >
         <SkipePrevIcon />
         </IconButton>
-        <div className={this.state.nowPlaying.playing ? 'hidden' : 'playsongs'}>
+        <div className={this.state.is_playing ? 'hidden' : 'playsongs'}>
         <IconButton color="secondary" onClick={()=> this.playSong()} >
         <PlayIcon />
         </IconButton>
         </div>
-        <div className={this.state.nowPlaying.playing ? 'playsongs' : 'hidden'}>
-        <IconButton color="secondary" className={this.state.nowPlaying.playing ? '' : 'hidden'}  onClick={()=> this.pauseSong()} >
+        <div className={this.state.is_playing ? 'playsongs' : 'hidden'}>
+        <IconButton color="secondary" onClick={()=> this.pauseSong()} >
         <PauseIcon />
         </IconButton>
         </div>
