@@ -12,7 +12,7 @@ import SkipeNextIcon from '@material-ui/icons/SkipNext'
 import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseIcon from '@material-ui/icons/PauseCircleOutline'
 import 'react-toastify/dist/ReactToastify.css';
-
+import KeyboardEventHandler from 'react-keyboard-event-handler'
 const spotifyWebApi = new Spotify()
 
 class SpotifyPage extends Component {
@@ -48,6 +48,12 @@ class SpotifyPage extends Component {
         // set Interval
         this.interval = setInterval(this.getNowPlaying, 1500);
   }
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      console.log('enter press here! ')
+    }
+  }
+
   getHashParams = () => {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -215,7 +221,7 @@ TryClearFuckingInterval(interval){
     }
   }
 
-  setLouder =() => {
+  setLouder = () => {
     console.log(this.state.volume)
     let volume = this.state.volume + 10
     if(volume > 100){
@@ -231,7 +237,7 @@ TryClearFuckingInterval(interval){
     })
   }
 
-  setQuiet(){
+  setQuiet = () => {
     console.log(this.state.nowPlaying.volume)
     let volume = this.state.volume - 10
     if(volume < 0){
@@ -246,7 +252,14 @@ TryClearFuckingInterval(interval){
       
     })
   }
-
+  playorpause = () => {
+    console.log(this.state.is_playing)
+    if(this.state.is_playing){
+      this.pauseSong()
+    }else if(!this.state.is_playing){
+      this.playSong()
+    }
+  }
   logOut(){
 
   }
@@ -305,7 +318,15 @@ TryClearFuckingInterval(interval){
         </div>
 
       </div>
+      <KeyboardEventHandler handleKeys={['space']} onKeyEvent={(key) => this.playorpause()} />
+      <KeyboardEventHandler handleKeys={['up']} onKeyEvent={(key) => this.setLouder()} />
+      <KeyboardEventHandler handleKeys={['down']} onKeyEvent={(key) => this.setQuiet()} />
+      <KeyboardEventHandler handleKeys={['left']} onKeyEvent={(key) => this.prevSong()} />
+      <KeyboardEventHandler handleKeys={['right']} onKeyEvent={(key) => this.skipSong()} />
+      <KeyboardEventHandler handleKeys={['enter']} onKeyEvent={(key) => console.log(key)} />
+
       </div>
+      
     );
   }
 
