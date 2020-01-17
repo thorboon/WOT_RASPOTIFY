@@ -117,6 +117,7 @@ const addEase = ( pos, to, ease ) => {
 /**
  * Shooting star object 
  */
+/*
 const shootingStar = {
  scene: null, 
  stars: [], 
@@ -158,10 +159,11 @@ const shootingStar = {
  },
 };
 
-
+*/
 /**
  * Starfield object 
  */
+/*
 const starField = {
  group: null, 
  total: 400, 
@@ -211,11 +213,11 @@ const starField = {
  }, 
 }; 
 
-
+*/
 /**
  * Mountains object
  */
-const mountains = {
+/*const mountains = {
  group: null, 
  simplex: null,
  geometry: null, 
@@ -284,7 +286,7 @@ const mountains = {
   addEase( this.group.rotation, this.look, this.ease );
  }, 
 };
-
+*/
 
 /**
  * Ground object
@@ -297,7 +299,7 @@ const groundPlain = {
  simplex: null,
  factor: 300, // smoothness 
  scale: 30, // terrain size
- speed: 0.015, // move speed 
+ speed: 0.002, // move speed 
  cycle: 0, 
  ease: 12, 
  move: { x: 0, y: -300, z: -1000 },
@@ -309,7 +311,7 @@ const groundPlain = {
   this.group.position.set( this.move.x, this.move.y, this.move.z );
   this.group.rotation.set( this.look.x, this.look.y, this.look.z );
   
-  this.geometry = new THREE.PlaneGeometry( 8000, 6000, 500, 400 ); 
+  this.geometry = new THREE.PlaneGeometry( 6000, 4000, 200, 50 ); 
   this.material = new THREE.MeshLambertMaterial({
    color: 0xffffff,
    opacity: 1,
@@ -355,6 +357,7 @@ const groundPlain = {
 /**
  * Ship object
  */
+/*
 const gunShip = {
  scene: null, 
  group: null,
@@ -491,7 +494,7 @@ const gunShip = {
  },
 };
 
-
+*/
 /**
  * Setup scene 
  */
@@ -528,10 +531,10 @@ const setupScene = () => {
  scene.add( light ); 
  
  // setup objects 
- starField.create( scene ); 
- mountains.create( scene ); 
+ //starField.create( scene ); 
+ //mountains.create( scene ); 
  groundPlain.create( scene ); 
- gunShip.create( scene ); 
+ //gunShip.create( scene ); 
  
  // on page resize
  window.addEventListener( 'resize', e => {
@@ -545,7 +548,7 @@ const setupScene = () => {
   mouse.x = deviceInfo.mouseCenterX( e ); 
   mouse.y = deviceInfo.mouseCenterY( e ); 
  });
-
+/*
  // on mouse wheel
  window.addEventListener( 'wheel', e => {
   gunShip.onScroll( e ); 
@@ -555,7 +558,7 @@ const setupScene = () => {
  window.addEventListener( 'click', e => {
   gunShip.onClick( e ); 
  });
- 
+ */
 
  // animation loop 
  const loop = () => {
@@ -571,11 +574,11 @@ const setupScene = () => {
    commonColor.setHSL( commonHue, .8, .5 );
   }
   // update objects 
-  shootingStar.update( mouse );
-  starField.update( mouse ); 
-  mountains.update( mouse ); 
+  //shootingStar.update( mouse );
+  //starField.update( mouse ); 
+  //mountains.update( mouse ); 
   groundPlain.update( mouse ); 
-  gunShip.update( mouse ); 
+  //gunShip.update( mouse ); 
   
   // render scene 
   renderer.render( scene, camera );
@@ -587,6 +590,6 @@ const setupScene = () => {
 // init 
 LoaderHelper.onReady( setupScene );
 LoaderHelper.loadTexture( 'starTexture', 'images/star.png' ); 
-LoaderHelper.loadTexture( 'mountainTexture', 'images/terrain2.jpg' ); 
+//LoaderHelper.loadTexture( 'mountainTexture', 'images/terrain2.jpg' ); 
 LoaderHelper.loadTexture( 'engineTexture', 'images/water.jpg' ); 
 LoaderHelper.loadGeometry( 'shipGeometry', 'models/SpaceFighter03/SpaceFighter03.obj' ); 
