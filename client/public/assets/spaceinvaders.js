@@ -3,8 +3,8 @@
         var self = this;        
         
         var canvas = document.createElement("canvas");
-        canvas.setAttribute("width", '800');
-        canvas.setAttribute("height", '800');
+        canvas.setAttribute("width", "400px");
+        canvas.setAttribute("height", "300px");
         canvas.setAttribute("id", canvasId);
         document.body.appendChild(canvas);
         

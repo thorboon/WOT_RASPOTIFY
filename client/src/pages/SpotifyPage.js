@@ -270,6 +270,7 @@ TryClearFuckingInterval(interval){
     return (
       <div>
         <ToastContainer></ToastContainer>
+        <button className={this.state.loggedIn ? '' : 'hidden'} href="http://localhost:8888">Please login</button>
         <section class="player" id="player">
  
         </section>
