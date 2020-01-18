@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Firebase store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<div class="container">
+<body class="noisy">
+<div class="emblem"><span class="icon-information"></span></div>
+<div class="frame">
+  <div class="piece output">
+    <h1>Search song</h1>
+    <label  for="title"><h4>Title</h4></label>
+    <input class="lijntjeu"type="text" name"title" id="inputTitle"><br>
+    <label  for="artist"><h4>Artist</h4></label>
+    <input class="lijntjeu" type="text" name"artist" id="inputArtist"><br>
+    
+    <button  id="savebtn" class="btn waves-effect waves.light">Search!</button>
+    <p>Click on song to delete</p>
+    <div id="title"></div>
+    
+  </div>
+  <div class="piece scanlines noclick"></div>
+  <div class="piece glow noclick"></div>
+</div>
+</body>
+</div>
+</div class="container">
+
+
+    </main>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+      
+
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDIG7Rz9x19TBzzPIm9BIm1JKCtDGg3-Bw",
+            authDomain: "spotifypoll-e2607.firebaseapp.com",
+            databaseURL: "https://spotifypoll-e2607.firebaseio.com",
+            projectId: "spotifypoll-e2607",
+            storageBucket: "spotifypoll-e2607.appspot.com",
+            messagingSenderId: "268377467416",
+            appId: "1:268377467416:web:d2f46cf25be9002ee6716d",
+            measurementId: "G-JDHF1KSXNK"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        </script>
+
+<script src="./funtions.js"></script>
+
+</body class="noisy">
+</html>
