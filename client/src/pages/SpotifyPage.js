@@ -273,10 +273,8 @@ TryClearFuckingInterval(interval){
     return (
       <div>
         <ToastContainer></ToastContainer>
-       <div id="playbutton" className={this.state.playingGame ? 'hidden' : 'loginbutton'}>
-        <a onClick={()=> this.startGame()}>
+       <div id="playbutton" className={this.state.playingGame ? 'hidden' : 'loginbutton'} onClick={()=> this.startGame()}>
               Play Space Invaders
-        </a>
         </div>
         <canvas id="spaceinvaders" className={this.state.playingGame ? '' : 'hidden'}></canvas>
         

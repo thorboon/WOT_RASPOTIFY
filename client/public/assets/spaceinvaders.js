@@ -1,9 +1,7 @@
-startgame = () =>{
+startgame = () => {
     console.log('starting')
-
     var Game = function(canvasId) {
         var self = this;        
-        
         var canvas = document.getElementById('spaceinvaders')
         canvas.setAttribute("width", "400px");
         canvas.setAttribute("height", "300px");
