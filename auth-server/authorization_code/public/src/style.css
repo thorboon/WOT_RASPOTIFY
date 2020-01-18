@@ -45,6 +45,7 @@
   .noclick {
     pointer-events: none;
   }
+  
   .frame {
     background-color: transparent;
     border-radius: 2rem;

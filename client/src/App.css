@@ -155,7 +155,6 @@ body {
   font-family: "Share", sans-serif;
   text-transform: uppercase;
   font-weight: 300;
-  min-width: 100%;
   color: #f0f0f0;
   font-weight: 300;
 }
@@ -201,6 +200,23 @@ h4 {
 
 .playsongs {
   display: inline;
+}
+.anim-typewriter{
+  overflow: hidden;
+  white-space: nowrap; /* Keeps the content on a single line */
+  border-right: .15em solid orange; /* The typwriter cursor */
+
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+             blinkTextCursor 500ms steps(44) infinite normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 24em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
 }
 
 canvas {
