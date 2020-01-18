@@ -1,10 +1,12 @@
-startgame = () => {
+startgame = (i) => {
     console.log('starting')
-    
+    console.log(i)
     var Game = function(canvasId) {
-        var self = this;        
-        var canvas = document.getElementById('spaceinvaders')
-        
+        var self = this;
+        canvas = document.createElement('canvas');
+        canvas.setAttribute("id", "canvas");        
+        //var canvas = document.getElementById('spaceinvaders')
+        console.log(canvas)
         canvas.setAttribute("width", "400px");
         canvas.setAttribute("height", "300px");
         canvas.setAttribute("id", canvasId);
@@ -31,7 +33,7 @@ startgame = () => {
             self.draw(ctx, gameSize);
             requestAnimationFrame(tick);
         };
-                
+             
         var ctx = document.getElementById(canvasId).getContext("2d");
         this.ctx = ctx;
         ctx.fillStyle = "rgb(0, 0, 0)";
@@ -60,6 +62,7 @@ startgame = () => {
         alien.onload = ship.onload = death.onload = xray.onload = itemLoaded;
         
         console.log("game running");
+
     };
     
     Game.prototype = {
@@ -78,10 +81,19 @@ startgame = () => {
                     
                     if (collided && (entityA instanceof Invader || entityA instanceof Player)) {
                         self.addDeath(new Death(self, entityA.position));
+                        if(entityA instanceof Player){
+                            console.log('died')
+                            died()
+                        }
+                       
                     }
                     
                     if (collided && (entityB instanceof Invader || entityB instanceof Player)) {
                         self.addDeath(new Death(self, entityB.position));
+                        if(entityB instanceof Player){
+                            console.log('died')
+                            died()
+                        }
                     }
                     
                     return collided;
@@ -116,6 +128,7 @@ startgame = () => {
             
             for (var i=0; i<this.deaths.length; i++) {
                 this.deaths[i].draw();
+                
             }
             
             for (i=0; i<this.entities.length; i++) {
@@ -128,6 +141,7 @@ startgame = () => {
         
         addDeath: function(death) {
             this.deaths.push(death);
+            
         },
         
         invadersBelow: function(invader) {
@@ -252,6 +266,7 @@ startgame = () => {
         this.position = position;
         this.count = 13;
         this.sprite = this.game.death;
+        
     };
     
     Death.prototype = {
@@ -310,19 +325,62 @@ startgame = () => {
                 b1left > b2right ||
                 b1top > b2bottom);
     };
-    
-    start = () => {
-        new Game("screen");
+
+    start = (i) => {
+        new Game(i);
     };
 
-    start()
+    start(i)
+
+    died = () => {
+        console.log(canvas)
+        setTimeout(function(){canvas.style.visibility = "hidden"; youdied.style.visibility = "visible" ; youdied.classList.add("fadein"); canvas.remove(); }, 1500);
+        setTimeout(function(){youdiedcontinue.style.visibility = "visible" ;  youdiedcontinue.classList.add("fadein");}, 3000)
+        //diedonce = true
+        
+         // Removes the div with the 'div-02' id
+        setDied()
+    }
 };
 
 window.addEventListener('load', function () {
+
     let button = document.getElementById('playbutton')
+    let diedonce = false
+    let gamestarted = false
+    let i = 0
+
     button.addEventListener('click', clickbutton = () => {
         console.log('clicked start button')
-        startgame()
+        startgame(i)
+        gamestarted = true
     })
+    window.addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        console.log(i)
+        console.log(gamestarted)
+        console.log(diedonce)
+        if (event.keyCode === 13 && !gamestarted && i < 1 && !diedonce) {
+            
+            console.log('enter')
+          // Cancel the default action, if needed
+          event.preventDefault();
+          // Trigger the button element with a click
+          button.click();
+          
+        } if (event.keyCode === 13 && diedonce){
+            i = 0 
+            diedonce = false
+        }
+      });
+
+      
+      setDied = () => {
+        console.log('setdied')
+        gamestarted = false
+        diedonce = true
+      }
+      
+
   })
 

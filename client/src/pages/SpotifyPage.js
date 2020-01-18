@@ -264,19 +264,32 @@ TryClearFuckingInterval(interval){
   }
   
   startGame = () => {
-    this.setState({
-      playingGame: true
-    })
+    console.log(this.state.playingGame)
+    if(this.state.playingGame){
+      this.setState({
+        playingGame: false
+      })
+      document.getElementById('youdied').style.visibility = "hidden"
+      document.getElementById('youdiedcontinue').style.visibility = "hidden"
+    }else{
+      this.setState({
+        playingGame: true
+      })
+    }
+
   }
 
+  
   render(){
     return (
       <div>
         <ToastContainer></ToastContainer>
-       <div id="playbutton" className={this.state.playingGame ? 'hidden' : 'loginbutton'} onClick={()=> this.startGame()}>
+        <h1 id="youdied">You Died!</h1>
+        <h3 id="youdiedcontinue">press enter to continue</h3>
+       <div id="playbutton" className={this.state.playingGame ? 'hidden' : 'loginbutton'} >
               Play Space Invaders
         </div>
-        <canvas id="spaceinvaders" className={this.state.playingGame ? '' : 'hidden'}></canvas>
+        
         
         <section class="player" id="player">
  
@@ -324,7 +337,7 @@ TryClearFuckingInterval(interval){
       <KeyboardEventHandler handleKeys={['down']} onKeyEvent={(key) => this.setQuiet()} />
       <KeyboardEventHandler handleKeys={['left']} onKeyEvent={(key) => this.prevSong()} />
       <KeyboardEventHandler handleKeys={['right']} onKeyEvent={(key) => this.skipSong()} />
-      <KeyboardEventHandler handleKeys={['enter']} onKeyEvent={(key) => console.log(key)} />
+      <KeyboardEventHandler handleKeys={['enter']} onKeyEvent={(key) => this.startGame()} />
 
       </div>
       
