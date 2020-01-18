@@ -262,15 +262,24 @@ TryClearFuckingInterval(interval){
       this.playSong()
     }
   }
-  logOut(){
-
+  
+  startGame = () => {
+    this.setState({
+      playingGame: true
+    })
   }
 
   render(){
     return (
       <div>
         <ToastContainer></ToastContainer>
-        <button className={this.state.loggedIn ? '' : 'hidden'} href="http://localhost:8888">Please login</button>
+       <div id="playbutton" className={this.state.playingGame ? 'hidden' : 'loginbutton'}>
+        <a onClick={()=> this.startGame()}>
+              Play Space Invaders
+        </a>
+        </div>
+        <canvas id="spaceinvaders" className={this.state.playingGame ? '' : 'hidden'}></canvas>
+        
         <section class="player" id="player">
  
         </section>

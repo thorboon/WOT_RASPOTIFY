@@ -1,8 +1,10 @@
-(function () {
+startgame = () =>{
+    console.log('starting')
+
     var Game = function(canvasId) {
         var self = this;        
         
-        var canvas = document.createElement("canvas");
+        var canvas = document.getElementById('spaceinvaders')
         canvas.setAttribute("width", "400px");
         canvas.setAttribute("height", "300px");
         canvas.setAttribute("id", canvasId);
@@ -311,4 +313,13 @@
     window.onload = function() {
         new Game("screen");
     };
-})();
+};
+
+window.addEventListener('load', function () {
+    let button = document.getElementById('playbutton')
+    button.addEventListener('click', clickbutton = () => {
+        console.log('clicked start button')
+        startgame()
+    })
+  })
+

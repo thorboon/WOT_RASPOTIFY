@@ -208,3 +208,27 @@ canvas {
   bottom: 0;
   left: 0;
 }
+
+.loginbutton {
+  position: absolute;
+  margin: auto;
+  right: 0;
+  left: 0;
+  top: 50%;
+  padding: 25px 45px;
+  width: 200px;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 500px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Share;
+  background: linear-gradient(270deg, #5f2c82, #ee38bf, #ff5858, #49a09d, #1b5ece, #5f2c82, #ee38bf, #ff5858);
+  background-size: 400% 400%;
+  animation: AnimationName 30s ease infinite;
+  
+}
+@keyframes AnimationName {
+  0%   { background-position: 0% center; }
+  100% { background-position: 100% center; }
+}
