@@ -16,7 +16,7 @@ import KeyboardEventHandler from 'react-keyboard-event-handler'
 const spotifyWebApi = new Spotify()
 
 class SpotifyPage extends Component {
-  
+
   constructor(props){
     super(props)
     const params = this.getHashParams();
@@ -39,11 +39,20 @@ class SpotifyPage extends Component {
       gotsong: false,
       skipe: false,
     }
-    if (true){
+    if (this.state.loggedIn){
       spotifyWebApi.setAccessToken(params.access_token)
+    } 
+  }
+  componentWillMount(){
+    console.log(this.state.loggedIn)
+    if(!this.state.loggedIn){
+      window.location.href = 'http://localhost:8888/'
+    }else{
+      console.log('loggedin')
     }
   }
   componentDidMount(){
+
         // Call this function so that it fetch first time right after mounting the component
         this.getNowPlaying()
 
@@ -89,9 +98,8 @@ class SpotifyPage extends Component {
           gotsong: true,
           is_playing: true,
         })
-        console.log('this.setstte', this.state.is_playing)
+        console.log('this.set', this.state.is_playing)
       }
-
       //this.getPercentage(this.state.nowPlaying.duration, this.state.nowPlaying.progress)
     }).catch((error)=> {
       console.log(error)
@@ -272,6 +280,8 @@ TryClearFuckingInterval(interval){
       })
       document.getElementById('youdied').style.visibility = "hidden"
       document.getElementById('youdiedcontinue').style.visibility = "hidden"
+      document.getElementById('youwon').style.visibility = "hidden"
+      document.getElementById('youwoncontinue').style.visibility = "hidden"
     }else{
       this.setState({
         playingGame: true
@@ -287,6 +297,9 @@ TryClearFuckingInterval(interval){
         <ToastContainer></ToastContainer>
         <h1 id="youdied">You Died!</h1>
         <h3 id="youdiedcontinue">press enter to continue</h3>
+
+        <h1 id="youwon">Congratulations! You Won!</h1>
+        <h3 id="youwoncontinue">press enter to continue</h3>
        <div id="playbutton" className={this.state.playingGame ? 'hidden' : 'loginbutton'} >
               Play Space Invaders
         </div>

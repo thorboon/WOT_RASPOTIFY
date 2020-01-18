@@ -1,6 +1,7 @@
 startgame = (i) => {
     console.log('starting')
     console.log(i)
+    let deadaliens = 0;
     var Game = function(canvasId) {
         var self = this;
         canvas = document.createElement('canvas');
@@ -118,6 +119,7 @@ startgame = (i) => {
             
             for (i=0; i<this.deaths.length; i++) {
                 this.deaths[i].update();
+                
             }
             
             //console.log("game updating");
@@ -141,7 +143,7 @@ startgame = (i) => {
         
         addDeath: function(death) {
             this.deaths.push(death);
-            
+            countdeadalien()
         },
         
         invadersBelow: function(invader) {
@@ -335,12 +337,27 @@ startgame = (i) => {
     died = () => {
         console.log(canvas)
         setTimeout(function(){canvas.style.visibility = "hidden"; youdied.style.visibility = "visible" ; youdied.classList.add("fadein"); canvas.remove(); }, 1500);
-        setTimeout(function(){youdiedcontinue.style.visibility = "visible" ;  youdiedcontinue.classList.add("fadein");}, 3000)
+        setTimeout(function(){youdiedcontinue.style.visibility = "visible" ;  youdiedcontinue.classList.add("fadein");}, 2000)
         //diedonce = true
         
          // Removes the div with the 'div-02' id
         setDied()
     }
+
+    countdeadalien = () => {
+        deadaliens ++ 
+        console.log(deadaliens)
+        if(deadaliens == 96){
+            youwon()
+        }
+    }
+
+    youwon = () => {
+        let youwon = document.getElementById('youwon')
+        setTimeout(function(){canvas.style.visibility = "hidden"; youwon.style.visibility = "visible" ; youwon.classList.add("fadein"); canvas.remove(); }, 1500);
+        setTimeout(function(){youwoncontinue.style.visibility = "visible" ;  youwoncontinue.classList.add("fadein");}, 2000)
+    }
+
 };
 
 window.addEventListener('load', function () {
