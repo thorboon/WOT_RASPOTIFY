@@ -299,7 +299,7 @@ const groundPlain = {
  simplex: null,
  factor: 300, // smoothness 
  scale: 30, // terrain size
- speed: 0.002, // move speed 
+ speed: 0.006, // move speed 
  cycle: 0, 
  ease: 12, 
  move: { x: 0, y: -300, z: -1000 },
@@ -345,6 +345,7 @@ const groundPlain = {
  }, 
  
  // update
+ 
  update( mouse ) {
   this.moveNoise();
   this.move.x = -( mouse.x * 0.04 );
@@ -502,6 +503,7 @@ const setupScene = () => {
  const scene = new THREE.Scene();
 
  // track mouse movement 
+
  let mouse = { 
   x: deviceInfo.screenCenterX(), 
   y: deviceInfo.screenCenterY(), 
@@ -544,10 +546,11 @@ const setupScene = () => {
  });
  
  // on mouse move 
+ /*
  window.addEventListener( 'mousemove', e => {
   mouse.x = deviceInfo.mouseCenterX( e ); 
   mouse.y = deviceInfo.mouseCenterY( e ); 
- });
+ });*/
 /*
  // on mouse wheel
  window.addEventListener( 'wheel', e => {
@@ -565,7 +568,7 @@ const setupScene = () => {
   requestAnimationFrame( loop ); 
   
   // add random shooting stars 
-  if ( Math.random() > 0.99 ) shootingStar.create( scene );
+  //if ( Math.random() > 0.99 ) shootingStar.create( scene );
   
   // update light hue 
   if ( cycleColor ) {
@@ -589,7 +592,7 @@ const setupScene = () => {
 
 // init 
 LoaderHelper.onReady( setupScene );
-LoaderHelper.loadTexture( 'starTexture', 'images/star.png' ); 
+//LoaderHelper.loadTexture( 'starTexture', 'images/star.png' ); 
 //LoaderHelper.loadTexture( 'mountainTexture', 'images/terrain2.jpg' ); 
 LoaderHelper.loadTexture( 'engineTexture', 'images/water.jpg' ); 
-LoaderHelper.loadGeometry( 'shipGeometry', 'models/SpaceFighter03/SpaceFighter03.obj' ); 
+//LoaderHelper.loadGeometry( 'shipGeometry', 'models/SpaceFighter03/SpaceFighter03.obj' ); 
