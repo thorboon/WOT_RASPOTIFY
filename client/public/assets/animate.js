@@ -299,7 +299,7 @@ const groundPlain = {
  simplex: null,
  factor: 300, // smoothness 
  scale: 30, // terrain size
- speed: 0.006, // move speed 
+ speed: 0.002, // move speed 
  cycle: 0, 
  ease: 12, 
  move: { x: 0, y: -300, z: -1000 },
@@ -311,7 +311,7 @@ const groundPlain = {
   this.group.position.set( this.move.x, this.move.y, this.move.z );
   this.group.rotation.set( this.look.x, this.look.y, this.look.z );
   
-  this.geometry = new THREE.PlaneGeometry( 6000, 4000, 200, 50 ); 
+  this.geometry = new THREE.PlaneGeometry( 9000, 4000, 100, 50 ); 
   this.material = new THREE.MeshLambertMaterial({
    color: 0xffffff,
    opacity: 1,
@@ -519,7 +519,7 @@ const setupScene = () => {
  document.body.appendChild( renderer.domElement );
 
  // setup camera 
- const camera = new THREE.PerspectiveCamera( 60, deviceInfo.screenRatio(), 0.1, 20000 );
+ const camera = new THREE.PerspectiveCamera( 60, deviceInfo.screenRatio(), 0.1, 2000 );
  camera.position.set( 0, 0, 300 );
  camera.rotation.set( 0, 0, 0 );
  camera.lookAt( scene.position );
