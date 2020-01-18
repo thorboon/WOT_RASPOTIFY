@@ -1,8 +1,10 @@
 startgame = () => {
     console.log('starting')
+    
     var Game = function(canvasId) {
         var self = this;        
         var canvas = document.getElementById('spaceinvaders')
+        
         canvas.setAttribute("width", "400px");
         canvas.setAttribute("height", "300px");
         canvas.setAttribute("id", canvasId);
@@ -276,7 +278,7 @@ startgame = () => {
             return keyState[keyCode] === true;
         };
         
-        this.KEYS = { LEFT: 37, RIGHT: 39, FIRE: 32 };
+        this.KEYS = { LEFT: 81, RIGHT: 68, FIRE: 90 };
     };
     
     var createInvaders = function(game) {
@@ -308,9 +310,11 @@ startgame = () => {
                 b1top > b2bottom);
     };
     
-    window.onload = function() {
+    start = () => {
         new Game("screen");
     };
+
+    start()
 };
 
 window.addEventListener('load', function () {
