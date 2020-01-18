@@ -13,6 +13,8 @@ import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseIcon from '@material-ui/icons/PauseCircleOutline'
 import 'react-toastify/dist/ReactToastify.css';
 import KeyboardEventHandler from 'react-keyboard-event-handler'
+import shortid from 'shortid'
+
 const spotifyWebApi = new Spotify()
 
 class SpotifyPage extends Component {
@@ -64,6 +66,13 @@ class SpotifyPage extends Component {
     }
     return hashParams;
   }
+
+  
+  getId = () => {
+    const id = shortid.generate();
+    console.log(id);
+    return id;
+  };
   getNowPlaying = () => {
     spotifyWebApi.getMyCurrentPlaybackState()
     .then((response) => {
@@ -286,7 +295,7 @@ TryClearFuckingInterval(interval){
         <h1 className={this.state.gotsong ? 'hidden' : ''}>Play a song on any device!</h1>
         <div className={this.state.gotsong ? '' : 'hidden'}>
             <img src={this.state.nowPlaying.image} style={{width: 120}}/>
-          <h1>
+          <h1 class="anim-typewriter" key={this.getId()}>
           {this.state.nowPlaying.name.toUpperCase()}
           </h1>
           <h1>
