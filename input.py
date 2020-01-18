@@ -22,11 +22,12 @@ GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
+GPIO.setup(17,GPIO.OUT)
 
 def upbutton_callback(channel):
    keyboard.press("z")
    keyboard.release("z")
+   GPIO.output(17,GPIO.HIGH)
    print('up')
     
 def downbutton_callback(channel):
