@@ -16,6 +16,7 @@ import KeyboardEventHandler from 'react-keyboard-event-handler'
 const spotifyWebApi = new Spotify()
 
 class SpotifyPage extends Component {
+  
   constructor(props){
     super(props)
     const params = this.getHashParams();
