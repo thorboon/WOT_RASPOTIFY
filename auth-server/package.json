@@ -9,10 +9,12 @@
     "cors": "^2.8.4",
     "querystring": "~0.2.0",
     "request": "~2.83.0"
-  }, "scripts": {
+  },
+  "scripts": {
     "start": "concurrently \"node authorization_code/app.js\" \"(cd ../client/ && npm start)\" ",
     "build": "concurrently \"npm install\" \"(cd ../client/ && npm install)\" "
-  },"devDependencies": {
+  },
+  "devDependencies": {
     "concurrently": "^5.0.2"
   }
 }

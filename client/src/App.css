@@ -26,6 +26,16 @@ body {
   color: #f0f0f0;
 }
 
+body::before{
+  position: absolute;
+  content: "";
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(transparent, #180e0e);
+
+}
 #stageElement {
   display: block;
   position: fixed;
@@ -33,7 +43,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
 }
 
 .player,
@@ -139,6 +149,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 250px;
+  z-index: 1;
 }
 .buttombar img {
   height: 120px;
@@ -212,7 +223,7 @@ h4 {
 }
 @keyframes typewriter{
   from{width: 0;}
-  to{width: 20em;}
+  to{width: 10em;}
 }
 @keyframes blinkTextCursor{
   from{border-right-color: rgba(255,255,255,.75);}
