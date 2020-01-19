@@ -308,16 +308,22 @@ TryClearFuckingInterval(interval){
       this.setState({
         playingGame: false
       })
+      if(document.getElementById('playbutton').style.visibility = 'hidden'){
+        document.getElementById('playbutton').style.visibility = 'visible'
+      }
       document.getElementById('score').style.visibility = 'hidden'
       document.getElementById('score').innerHTML = 0
       document.getElementById('youdied').style.visibility = "hidden"
       document.getElementById('youdiedcontinue').style.visibility = "hidden"
       document.getElementById('youwon').style.visibility = "hidden"
       document.getElementById('youwoncontinue').style.visibility = "hidden"
+      
     }else{
+      document.getElementById('playbutton').style.visibility = 'hidden'
       this.setState({
         playingGame: true
       })
+      
     }
 
   }

@@ -182,6 +182,9 @@ startgame = (i) => {
                 this.game.addEntity(new Bullet(this, { x: 0, y: -5 }));
                 this.fireEnabled = false;
             }
+            if(this.controls.isDown(this.controls.KEYS.ENTER)){
+                quit()
+            }
         },
         draw: function() {
             this.game.ctx.drawImage(this.game.ship, 0, 0, this.size.w, this.size.h, this.position.x - this.size.w/2, this.position.y - this.size.h/2, this.size.w, this.size.h);
@@ -296,7 +299,7 @@ startgame = (i) => {
             return keyState[keyCode] === true;
         };
         
-        this.KEYS = { LEFT: 81, RIGHT: 68, FIRE: 90 };
+        this.KEYS = { LEFT: 81, RIGHT: 68, FIRE: 90, ENTER: 13 };
     };
     
     var createInvaders = function(game) {
@@ -336,20 +339,36 @@ startgame = (i) => {
 
     start(i)
 
+    let quit = false
+
     died = () => {
         console.log(canvas)
-        setTimeout(function(){canvas.style.visibility = "hidden"; score.style.visibility = "hidden"; youdied.style.visibility = "visible" ; youdied.classList.add("fadein"); canvas.remove(); }, 1500);
-        setTimeout(function(){youdiedcontinue.style.visibility = "visible" ;  youdiedcontinue.classList.add("fadein");}, 2000)
-        setDied()
+        if(quit == true){
+            console.log('quit')
+        }else{
+            setTimeout(function(){canvas.style.visibility = "hidden"; score.style.visibility = "hidden"; youdied.style.visibility = "visible" ; youdied.classList.add("fadein"); canvas.remove(); }, 1500);
+            setTimeout(function(){youdiedcontinue.style.visibility = "visible" ;  youdiedcontinue.classList.add("fadein");}, 2000)
+            setDied()
+        }
+        
     }
 
+    quit = () => {
+        console.log('quit')
+        canvas.style.visibility = "hidden"; 
+        document.getElementById('score').innerHTML = 'Score:' + 0
+        score.style.visibility = "hidden"; 
+        quit = true
+        canvas.remove();
+        setQuit()
+    }
     countdeadalien = () => {
         deadaliens ++ 
         console.log(deadaliens)
         // show score
         if(deadaliens > 0){
             let score = deadaliens / 2
-            document.getElementById('score').innerHTML = score
+            document.getElementById('score').innerHTML = 'Score:' + score
         }
         
         if(deadaliens == 96){
@@ -377,6 +396,8 @@ window.addEventListener('load', function () {
         startgame(i)
         gamestarted = true
     })
+
+
     window.addEventListener("keyup", function(event) {
         // Number 13 is the "Enter" key on the keyboard
         console.log(i)
@@ -395,7 +416,6 @@ window.addEventListener('load', function () {
             diedonce = false
         }
       });
-
       
       setDied = () => {
         console.log('setdied')
@@ -403,6 +423,11 @@ window.addEventListener('load', function () {
         diedonce = true
       }
       
+      setQuit = () => {
+        console.log('setquit')
+        gamestarted = false
+        diedonce = true
+      }
 
   })
 
