@@ -24,6 +24,7 @@ body {
   font-size: 18px;
   line-height: 1.2em;
   color: #f0f0f0;
+  
 }
 
 body::before{
@@ -36,6 +37,12 @@ body::before{
   background: linear-gradient(transparent, #180e0e);
 
 }
+
+@keyframes snow { 
+  0% { background-position: 0px 0px, 0px 0px, 0px 0px }
+
+  100% { background-position: 500px 1000px, 400px 400px, 300px 300px }
+}
 #stageElement {
   display: block;
   position: fixed;
@@ -45,7 +52,57 @@ body::before{
   height: 100%;
   z-index: 0;
 }
+.fade-in {
+  animation: fadeIn ease 2.7s;
+  -webkit-animation: fadeIn ease 2.7s;
+  -moz-animation: fadeIn ease 2.7s;
+  -o-animation: fadeIn ease 2.7s;
+  -ms-animation: fadeIn ease 2.7s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
 
+@-moz-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+}
+}
 .player,
 .instructions {
   display: flex;
@@ -223,7 +280,7 @@ h4 {
 }
 @keyframes typewriter{
   from{width: 0;}
-  to{width: 10em;}
+  to{width: 100%;}
 }
 @keyframes blinkTextCursor{
   from{border-right-color: rgba(255,255,255,.75);}

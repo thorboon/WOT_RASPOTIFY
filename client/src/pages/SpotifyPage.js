@@ -102,11 +102,14 @@ class SpotifyPage extends Component {
         }else{
           console.log('not same song')
           //if not same song add animation
+          document.getElementById('image').classList.add('fade-in')
           document.getElementById('title').classList.add('anim-typewriter')
           document.getElementById('artist').classList.add('anim-typewriter')
 
-          setTimeout(function(){document.getElementById('title').classList.remove('anim-typewriter')}, 2700)
-          setTimeout(function(){document.getElementById('artist').classList.remove('anim-typewriter')}, 2700)
+          setTimeout(function(){document.getElementById('title').classList.remove('anim-typewriter')}, 3700)
+          setTimeout(function(){document.getElementById('artist').classList.remove('anim-typewriter')}, 3700)
+          setTimeout(function(){document.getElementById('image').classList.remove('fade-in')}, 2700)
+
 
 
 
@@ -351,7 +354,7 @@ TryClearFuckingInterval(interval){
         <div className="buttombar">
         <h1 className={this.state.gotsong ? 'hidden' : ''}>Play a song on any device!</h1>
         <div className={this.state.gotsong ? '' : 'hidden'}>
-            <img src={this.state.nowPlaying.image} style={{width: 120}}/>
+            <img id="image" src={this.state.nowPlaying.image} style={{width: 120}}/>
           <h1 id="title">
           {this.state.nowPlaying.name.toUpperCase()}
           </h1>
