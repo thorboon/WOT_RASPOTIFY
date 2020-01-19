@@ -26,6 +26,7 @@ function deleta (id){
         console.error(error);
     });
 };
+
 //function getdata() {
 //   var songs=document.getElementById("title").value;
 //
@@ -56,11 +57,62 @@ let items = document.querySelectorAll('.songs');
 
 let list = [];
 
-setTimeout(function() {   //calls click event after a certain time
-    var randomItem = list[Math.floor(Math.random()*list.length)]
-    console.log(randomItem)
-  }, 2000);
+var timer;
+var startTime;
 
+function start() {
+  startTime = parseInt(localStorage.getItem('startTime') || Date.now());
+  localStorage.setItem('startTime', startTime);
+  timer = setInterval(clockTick, 100);
+}
+
+function stop() {
+  clearInterval(timer);
+}
+
+function reset() {
+  clearInterval(timer);
+  localStorage.removeItem('startTime');
+}
+
+
+
+function clockTick() {
+    var currentTime = Date.now()
+    if(currentTime - startTime >= 150*60*100){
+        stop();
+        var randomItem = list[Math.floor(Math.random()*list.length)]
+        database.ref('/randomSong/').set({
+           randomItem
+        }) .then(() => {
+            console.log('Added new song to database');
+            location.reload()
+        });
+
+
+        database.ref('/songs/').set({
+        }) .then(() => {
+            console.log('Added new song to database');
+        });
+
+        reset()
+    }
+
+};
+
+var stopBtn = document.getElementById('stop_btn');
+
+stopBtn.addEventListener('click', function() {
+  stop();
+  reset()
+})
+start();
+
+    // callback function for final action after countdown
+        //var randomItem = list[Math.floor(Math.random()*list.length)]
+        //console.log(randomItem)
+        // show message that session is over, perhaps redirect or log out 
+         
 
 function getdata(){
     var ref = firebase.database().ref("songs");

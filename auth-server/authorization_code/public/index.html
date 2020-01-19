@@ -142,25 +142,53 @@
                   $('#loggedin').show();
                 }
             });
+
+            var timer;
+            var startTime;
+
+            function start() {
+              startTime = parseInt(localStorage.getItem('startTime') || Date.now());
+              localStorage.setItem('startTime', startTime);
+              timer = setInterval(clockTick, 100);
+            }
+
+            function stop() {
+              clearInterval(timer);
+            }
+
+            function reset() {
+              clearInterval(timer);
+              localStorage.removeItem('startTime');
+            }
+
+
+
+            function clockTick() {
+                var currentTime = Date.now()
+                if(currentTime - startTime >= 560*60*100){
+                    stop();
+                    $.ajax({
+                      url: '/refresh_token',
+                      data: {
+                        'refresh_token': refresh_token
+                      }
+                    }).done(function(data) {
+                      access_token = data.access_token;
+                      oauthPlaceholder.innerHTML = oauthTemplate({
+                        access_token: access_token,
+                        refresh_token: refresh_token
+                      });
+                    })
+
+                    reset()
+                }
+
+};
           } else {
               // render initial screen
               $('#login').show();
               $('#loggedin').hide();
           }
-          setTimeout(function() {   //calls click event after a certain time
-            $.ajax({
-              url: '/refresh_token',
-              data: {
-                'refresh_token': refresh_token
-              }
-            }).done(function(data) {
-              access_token = data.access_token;
-              oauthPlaceholder.innerHTML = oauthTemplate({
-                access_token: access_token,
-                refresh_token: refresh_token
-              });
-            })
-          }, 3360000);
 
           document.getElementById('obtain-new-token').addEventListener('click', function() {
             $.ajax({
