@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Firebase store</title>
+    <title>SpotifyPoll</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 <div class="container">
 <body class="noisy">
@@ -15,12 +15,12 @@
   <div class="piece output">
     <h1>Search song</h1>
     <label  for="title"><h4>Title</h4></label>
-    <input class="lijntjeu"type="text" name"title" id="inputTitle"><br>
+    <input class="lijntje"type="text" name"title" id="inputTitle"><br>
     <label  for="artist"><h4>Artist</h4></label>
-    <input class="lijntjeu" type="text" name"artist" id="inputArtist"><br>
+    <input class="lijntje" type="text" name"artist" id="inputArtist"><br>
     
     <button  id="savebtn" class="btn waves-effect waves.light">Search!</button>
-    <p>Click on song to delete</p>
+    <p class="move_under">Click on song to delete</p>
     <div id="title"></div>
     
   </div>
@@ -31,7 +31,7 @@
 </div>
 </div class="container">
 
-<input id="stop_btn" type="button" value="stop">
+
 
     </main>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -59,7 +59,7 @@
         
         </script>
 
-<script src="./funtions.js"></script>
+<script src="./scripts/functions.js"></script>
 
 </body class="noisy">
 </html>

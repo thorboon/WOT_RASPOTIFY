@@ -108,13 +108,7 @@ function clockTick() {
 
 };
 
-var stopBtn = document.getElementById('stop_btn');
 
-stopBtn.addEventListener('click', function() {
-  stop();
-  reset()
-})
-start();
 
     // callback function for final action after countdown
         //var randomItem = list[Math.floor(Math.random()*list.length)]

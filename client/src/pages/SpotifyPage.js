@@ -3,17 +3,17 @@ import '../App.css';
 import * as $ from "jquery";
 import Spotify from 'spotify-web-api-js'
 import { ToastContainer, toast } from 'react-toastify';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IconButton from '@material-ui/core/IconButton';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import VolumeDownIcon from '@material-ui/icons/VolumeDown';
 import SkipePrevIcon from '@material-ui/icons/SkipPrevious';
-import SkipeNextIcon from '@material-ui/icons/SkipNext'
+import SkipeNextIcon from '@material-ui/icons/SkipNext';
 import PlayIcon from '@material-ui/icons/PlayCircleOutline';
-import PauseIcon from '@material-ui/icons/PauseCircleOutline'
+import PauseIcon from '@material-ui/icons/PauseCircleOutline';
 import 'react-toastify/dist/ReactToastify.css';
-import KeyboardEventHandler from 'react-keyboard-event-handler'
-import shortid from 'shortid'
+import KeyboardEventHandler from 'react-keyboard-event-handler';
+import shortid from 'shortid';
 
 const spotifyWebApi = new Spotify()
 
@@ -142,6 +142,34 @@ class SpotifyPage extends Component {
     })
     
   }
+
+//search Song
+//first connection with firebase
+
+//src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js">
+
+
+
+  // Your web app's Firebase configuration
+  //var firebaseConfig = {
+  //apiKey: "AIzaSyDIG7Rz9x19TBzzPIm9BIm1JKCtDGg3-Bw",
+  //  authDomain: "spotifypoll-e2607.firebaseapp.com",
+  //  databaseURL: "https://spotifypoll-e2607.firebaseio.com",
+  //  projectId: "spotifypoll-e2607",
+  //  storageBucket: "spotifypoll-e2607.appspot.com",
+  //  messagingSenderId: "268377467416",
+  //  appId: "1:268377467416:web:d2f46cf25be9002ee6716d",
+  //  measurementId: "G-JDHF1KSXNK"
+  //  };
+  // Initialize Firebase
+  // firebase.initializeApp(firebaseConfig);
+
+// query that must search for the song 
+// https://api.spotify.com/v1/search?q=this must be the artist&type=artist
+//curl -X "GET" "https://api.spotify.com/v1/search?q=tania%20bowra&type=artist" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer "
+
+
+
 
 /*
   getPercentage(noemer,teller){
