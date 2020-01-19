@@ -47,13 +47,13 @@ class SpotifyPage extends Component {
   }
   componentWillMount(){
     console.log(this.state.loggedIn)
-    /*
+    
     if(!this.state.loggedIn){
       window.location.href = 'http://localhost:8888/'
     }else{
       console.log('loggedin')
     }
-    */
+    
   }
   componentDidMount(){
 
