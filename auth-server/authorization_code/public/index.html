@@ -160,8 +160,8 @@
                 refresh_token: refresh_token
               });
             })
-          }, 3360);
-          
+          }, 3360000);
+
           document.getElementById('obtain-new-token').addEventListener('click', function() {
             $.ajax({
               url: '/refresh_token',

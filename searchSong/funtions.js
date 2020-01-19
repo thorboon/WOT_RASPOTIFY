@@ -40,7 +40,7 @@ function deleta (id){
     
 //});
 //}
-function dicks() {
+function songRequest() {
 let items = document.querySelectorAll('.songs');
     if(items != null){
         for(let i = 0; i < items.length; i++){
@@ -51,23 +51,36 @@ let items = document.querySelectorAll('.songs');
         }
     }
 }
+
+
+
+let list = [];
+
+setTimeout(function() {   //calls click event after a certain time
+    var randomItem = list[Math.floor(Math.random()*list.length)]
+    console.log(randomItem)
+  }, 2000);
+
+
 function getdata(){
     var ref = firebase.database().ref("songs");
     ref.once("value")
     .then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
-            console.log(childSnapshot.val())
-            const data = childSnapshot.val()
+            let data = childSnapshot.val()
 
+            list.push(data)
+            
             let newdiv = document.createElement('div');
             newdiv.id = childSnapshot.key;
             newdiv.className = "songs";
             newdiv.innerHTML = data.title + " " + data.artist ;
-
+            
+            console.log(list)
             output.appendChild(newdiv)
 
         })
-        dicks()
+        songRequest()
 
 });
 }getdata()
