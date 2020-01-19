@@ -34,7 +34,7 @@
       <div class="piece output">
         <div id="login">
             <h1>You should REALLY log in to spotify</h1>
-            <a href="/login" class="btn btn-primary login">Log in with Spotify</a>
+            <a id="loginbutton" href="/login" class="btn btn-primary login">Log in with Spotify</a>
           </div>
       </div>
       <div class="piece scanlines noclick"></div>
@@ -85,6 +85,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
+       document.addEventListener('keydown', function(event) {
+        if (event.keyCode === 13) {
+          document.getElementById('loginbutton').click()
+        }
+      });
       (function() {
 
         /**
