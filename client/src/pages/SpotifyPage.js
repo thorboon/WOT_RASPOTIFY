@@ -47,11 +47,13 @@ class SpotifyPage extends Component {
   }
   componentWillMount(){
     console.log(this.state.loggedIn)
+    /*
     if(!this.state.loggedIn){
       window.location.href = 'http://localhost:8888/'
     }else{
       console.log('loggedin')
     }
+    */
   }
   componentDidMount(){
 
@@ -59,7 +61,7 @@ class SpotifyPage extends Component {
         this.getNowPlaying()
 
         // set Interval
-        this.interval = setInterval(this.getNowPlaying, 1500);
+        this.interval = setInterval(this.getNowPlaying, 2000);
   }
   handleKeyPress = (event) => {
     if(event.key === 'Enter'){
@@ -93,6 +95,15 @@ class SpotifyPage extends Component {
         console.log('song is pauzed')
         this.pauseSong()
       }else{
+        if(this.state.name == response.item.name){
+          // if same song don't do anything
+          //setTimeout(function(){document.getElementById('title').classList.remove('anim-typewriter')}, 1500)
+        }else{
+          console.log('not same song')
+          //if not same song add animation
+          document.getElementById('title').classList.add('anim-typewriter')
+          setTimeout(function(){document.getElementById('title').classList.remove('anim-typewriter')}, 2700)
+        }
         this.setState({
           nowPlaying: {
             name: response.item.name,
@@ -102,6 +113,7 @@ class SpotifyPage extends Component {
             duration: response.item.duration_ms,
             progress: response.progress_ms
           },
+          name: response.item.name,
           volume: response.device.volume_percent,
           skip: false,
           gotsong: true,
@@ -287,6 +299,8 @@ TryClearFuckingInterval(interval){
       this.setState({
         playingGame: false
       })
+      document.getElementById('score').style.visibility = 'hidden'
+      document.getElementById('score').innerHTML = 0
       document.getElementById('youdied').style.visibility = "hidden"
       document.getElementById('youdiedcontinue').style.visibility = "hidden"
       document.getElementById('youwon').style.visibility = "hidden"
@@ -304,6 +318,7 @@ TryClearFuckingInterval(interval){
     return (
       <div>
         <ToastContainer></ToastContainer>
+        <h1 id="score"></h1>
         <h1 id="youdied">You Died!</h1>
         <h3 id="youdiedcontinue">press enter to continue</h3>
 
@@ -322,10 +337,10 @@ TryClearFuckingInterval(interval){
         <h1 className={this.state.gotsong ? 'hidden' : ''}>Play a song on any device!</h1>
         <div className={this.state.gotsong ? '' : 'hidden'}>
             <img src={this.state.nowPlaying.image} style={{width: 120}}/>
-          <h1 class="anim-typewriter" key={this.getId()}>
+          <h1 id="title">
           {this.state.nowPlaying.name.toUpperCase()}
           </h1>
-          <h1>
+          <h1 id="artist">
           {this.state.nowPlaying.artist.toUpperCase()}
           </h1>
 

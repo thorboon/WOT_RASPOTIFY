@@ -2,33 +2,34 @@ startgame = (i) => {
     console.log('starting')
     console.log(i)
     let deadaliens = 0;
-    var Game = function(canvasId) {
-        var self = this;
-        canvas = document.createElement('canvas');
-        canvas.setAttribute("id", "canvas");        
+    
+    let Game = function(canvasId) {
+        let self = this;
+        canvas = document.createElement('canvas')
+        canvas.setAttribute('id', 'canvas');        
         //var canvas = document.getElementById('spaceinvaders')
         console.log(canvas)
-        canvas.setAttribute("width", "400px");
-        canvas.setAttribute("height", "300px");
-        canvas.setAttribute("id", canvasId);
-        document.body.appendChild(canvas);
+        canvas.setAttribute('width', '400px')
+        canvas.setAttribute('height', '300px')
+        canvas.setAttribute('id', canvasId)
+        document.body.appendChild(canvas)
         
-        var gameSize = { w: canvas.width, h: canvas.height };
-        this.gameSize = gameSize;
-        
-        var images = [];
-        var items = 0;
-        
-        var itemLoaded = function(e) {
-            items ++;
-            
-            if (items >= images.length) {
-                self.deaths = [];
-                self.entities = createInvaders(self).concat(new Player(self, self.gameSize));
-                tick();
+        let gameSize = {w: canvas.width, h: canvas.height }
+        this.gameSize = gameSize
+
+        let images = []
+        let items = 0
+
+        let itemLoaded = function(e){
+            items ++
+
+            if(items >= images.length){
+                self.deaths = []
+                self.entities = createInvaders(self).concat(new Player(self, self.gameSize))
+                tick()
             }
-        };
-        
+        }
+
         var tick = function() {
             self.update();
             self.draw(ctx, gameSize);
@@ -145,7 +146,6 @@ startgame = (i) => {
             this.deaths.push(death);
             countdeadalien()
         },
-        
         invadersBelow: function(invader) {
             return this.entities.filter(function (anotherInvader) {
                 return anotherInvader instanceof Invader &&
@@ -279,7 +279,8 @@ startgame = (i) => {
             this.game.ctx.drawImage(this.sprite, 0, 0, this.size.w, this.size.h, this.position.x - this.size.w/2, this.position.y - this.size.h/2, this.size.w, this.size.h);
         }
     };
-    
+
+
     var Controls = function() {
         var keyState = {};
         
@@ -330,23 +331,27 @@ startgame = (i) => {
 
     start = (i) => {
         new Game(i);
+        document.getElementById('score').style.visibility="visible"
     };
 
     start(i)
 
     died = () => {
         console.log(canvas)
-        setTimeout(function(){canvas.style.visibility = "hidden"; youdied.style.visibility = "visible" ; youdied.classList.add("fadein"); canvas.remove(); }, 1500);
+        setTimeout(function(){canvas.style.visibility = "hidden"; score.style.visibility = "hidden"; youdied.style.visibility = "visible" ; youdied.classList.add("fadein"); canvas.remove(); }, 1500);
         setTimeout(function(){youdiedcontinue.style.visibility = "visible" ;  youdiedcontinue.classList.add("fadein");}, 2000)
-        //diedonce = true
-        
-         // Removes the div with the 'div-02' id
         setDied()
     }
 
     countdeadalien = () => {
         deadaliens ++ 
         console.log(deadaliens)
+        // show score
+        if(deadaliens > 0){
+            let score = deadaliens / 2
+            document.getElementById('score').innerHTML = score
+        }
+        
         if(deadaliens == 96){
             youwon()
         }
@@ -354,7 +359,7 @@ startgame = (i) => {
 
     youwon = () => {
         let youwon = document.getElementById('youwon')
-        setTimeout(function(){canvas.style.visibility = "hidden"; youwon.style.visibility = "visible" ; youwon.classList.add("fadein"); canvas.remove(); }, 1500);
+        setTimeout(function(){canvas.style.visibility = "hidden";score.style.visibility = "hidden"; youwon.style.visibility = "visible" ; youwon.classList.add("fadein"); canvas.remove(); }, 1500);
         setTimeout(function(){youwoncontinue.style.visibility = "visible" ;  youwoncontinue.classList.add("fadein");}, 2000)
     }
 

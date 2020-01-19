@@ -207,12 +207,12 @@ h4 {
   border-right: .15em solid orange; /* The typwriter cursor */
 
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  animation: typewriter 4s steps(44) 1s 1 normal both,
+  animation: typewriter 2s steps(44) 1s 1 normal both,
              blinkTextCursor 500ms steps(44) infinite normal;
 }
 @keyframes typewriter{
   from{width: 0;}
-  to{width: 24em;}
+  to{width: 20em;}
 }
 @keyframes blinkTextCursor{
   from{border-right-color: rgba(255,255,255,.75);}
@@ -387,4 +387,15 @@ canvas {
   100% {
     opacity:0;
 }
+}
+
+#score {
+  visibility: hidden;
+  position: absolute;
+  margin: auto;
+  right: 0;
+  left: 0;
+  top: 20%;
+  font-weight: bold;
+  font-family: Share;
 }
