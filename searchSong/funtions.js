@@ -94,7 +94,15 @@ function clockTick() {
         }) .then(() => {
             console.log('Added new song to database');
         });
+        
 
+        setInterval(() => {
+            database.ref('/randomSong/').set({
+             }) .then(() => {
+                 console.log('Added new song to database');
+                 location.reload()
+             });
+        }, 120000);
         reset()
     }
 
