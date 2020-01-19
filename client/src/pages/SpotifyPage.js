@@ -106,8 +106,8 @@ class SpotifyPage extends Component {
           document.getElementById('title').classList.add('anim-typewriter')
           document.getElementById('artist').classList.add('anim-typewriter')
 
-          setTimeout(function(){document.getElementById('title').classList.remove('anim-typewriter')}, 2700)
-          setTimeout(function(){document.getElementById('artist').classList.remove('anim-typewriter')}, 2700)
+          setTimeout(function(){document.getElementById('title').classList.remove('anim-typewriter')}, 3700)
+          setTimeout(function(){document.getElementById('artist').classList.remove('anim-typewriter')}, 3700)
           setTimeout(function(){document.getElementById('image').classList.remove('fade-in')}, 2700)
 
 
