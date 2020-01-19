@@ -349,7 +349,7 @@ startgame = (i) => {
         // show score
         if(deadaliens > 0){
             let score = deadaliens / 2
-            document.getElementById('score').innerHTML = score
+            document.getElementById('score').innerHTML = 'Score:' + score
         }
         
         if(deadaliens == 96){
