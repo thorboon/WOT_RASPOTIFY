@@ -85,6 +85,7 @@ class SpotifyPage extends Component {
     console.log(id);
     return id;
   };
+
   getNowPlaying = () => {
     spotifyWebApi.getMyCurrentPlaybackState()
     .then((response) => {
@@ -102,7 +103,13 @@ class SpotifyPage extends Component {
           console.log('not same song')
           //if not same song add animation
           document.getElementById('title').classList.add('anim-typewriter')
+          document.getElementById('artist').classList.add('anim-typewriter')
+
           setTimeout(function(){document.getElementById('title').classList.remove('anim-typewriter')}, 2700)
+          setTimeout(function(){document.getElementById('artist').classList.remove('anim-typewriter')}, 2700)
+
+
+
         }
         this.setState({
           nowPlaying: {
@@ -120,6 +127,8 @@ class SpotifyPage extends Component {
           is_playing: true,
         })
         console.log('this.set', this.state.is_playing)
+        document.body.style.backgroundImage = `url('${this.state.nowPlaying.image}')`;
+
       }
       //this.getPercentage(this.state.nowPlaying.duration, this.state.nowPlaying.progress)
     }).catch((error)=> {
@@ -335,7 +344,7 @@ TryClearFuckingInterval(interval){
         </div>
         
         
-        <section class="player" id="player">
+        <section className="player" id="player">
  
         </section>
 
