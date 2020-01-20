@@ -49,7 +49,7 @@
         <div id="oauth">
         </div>
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
-        <a href="/login" class="btn btn-primary">Go back</a>
+        <a class="btn btn-primary">Go back</a>
 
       </div>
     </div>
@@ -85,9 +85,18 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
+      let logginpage = false
+
        document.addEventListener('keydown', function(event) {
         if (event.keyCode === 13) {
-          document.getElementById('loginbutton').click()
+          if(logginpage){
+            console.log('accesstoken')
+            toApp()
+          }else{
+            document.getElementById('loginbutton').click()
+          }
+          
+          
         }
       });
       (function() {
@@ -120,6 +129,8 @@
             refresh_token = params.refresh_token,
             error = params.error;
 
+        
+
         if (error) {
           alert('There was an error during the authentication');
         } else {
@@ -137,7 +148,7 @@
                 },
                 success: function(response) {
                   userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-
+                  logginpage = true
                   $('#login').hide();
                   $('#loggedin').show();
                 }
@@ -190,6 +201,11 @@
               $('#loggedin').hide();
           }
 
+          toApp = () => {
+            console.log('to app')
+            
+            window.location.href = 'http://localhost:3000/#access_token=' + access_token + '&refresh_token=' + refresh_token
+        }
           document.getElementById('obtain-new-token').addEventListener('click', function() {
             $.ajax({
               url: '/refresh_token',

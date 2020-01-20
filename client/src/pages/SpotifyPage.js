@@ -40,6 +40,7 @@ class SpotifyPage extends Component {
     const params = this.getHashParams();
     this.state = {
       loggedIn: params.access_token ? true : false,
+      refreshtoken: params.refresh_token ,
       nowPlaying: {
         name: 'Play a song!',
         image: '',
@@ -68,7 +69,6 @@ class SpotifyPage extends Component {
     } 
   }
   componentWillMount(){
-    
     if(!this.state.loggedIn){
       window.location.href = 'http://localhost:8888/'
     }else{
@@ -154,9 +154,6 @@ class SpotifyPage extends Component {
           setTimeout(function(){document.getElementById('artist').classList.remove('anim-typewriter')}, 3700)
           setTimeout(function(){document.getElementById('image').classList.remove('fade-in')}, 2700)
 
-
-
-
         }
         this.setState({
           nowPlaying: {
@@ -180,6 +177,7 @@ class SpotifyPage extends Component {
      
     }).catch((error)=> {
       console.log(error)
+      window.location.href = 'http://localhost:8888'
     })
     
   }
