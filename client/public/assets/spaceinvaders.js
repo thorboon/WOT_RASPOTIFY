@@ -175,9 +175,16 @@ startgame = (i) => {
             }
             
             if (this.controls.isDown(this.controls.KEYS.LEFT)) {
-                this.position.x -=1;
+                if(this.position.x > 1 || this.position.x < 399){
+                    this.position.x -=1;
+                }
+                
+                
             } else if (this.controls.isDown(this.controls.KEYS.RIGHT)) {
-                this.position.x += 1;
+                if(this.position.x > 1 || this.position.x < 399){
+                    this.position.x += 1;
+                }
+                
             }
             
             if (this.fireEnabled && this.controls.isDown(this.controls.KEYS.FIRE)) {
