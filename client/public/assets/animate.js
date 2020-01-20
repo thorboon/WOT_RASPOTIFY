@@ -1,3 +1,5 @@
+// all rights goes to https://codepen.io/rainner/pen/MqBVKo
+
 /**
  * Common options
  */
@@ -184,7 +186,7 @@ const groundPlain = {
 
 
 
-*/
+
 /**
  * Setup scene 
  */
@@ -222,10 +224,8 @@ const setupScene = () => {
  scene.add( light ); 
  
  // setup objects 
- //starField.create( scene ); 
- //mountains.create( scene ); 
+
  groundPlain.create( scene ); 
- //gunShip.create( scene ); 
  
  // on page resize
  window.addEventListener( 'resize', e => {
@@ -240,9 +240,7 @@ const setupScene = () => {
  const loop = () => {
   requestAnimationFrame( loop ); 
   
-  // add random shooting stars 
-  //if ( Math.random() > 0.99 ) shootingStar.create( scene );
-  
+
   // update light hue 
   if ( cycleColor ) {
    commonHue += 0.001; 
@@ -250,11 +248,8 @@ const setupScene = () => {
    commonColor.setHSL( commonHue, .8, .5 );
   }
   // update objects 
-  //shootingStar.update( mouse );
-  //starField.update( mouse ); 
-  //mountains.update( mouse ); 
+
   groundPlain.update( mouse ); 
-  //gunShip.update( mouse ); 
   
   // render scene 
   renderer.render( scene, camera );
@@ -265,7 +260,4 @@ const setupScene = () => {
 
 // init 
 LoaderHelper.onReady( setupScene );
-//LoaderHelper.loadTexture( 'starTexture', 'images/star.png' ); 
-//LoaderHelper.loadTexture( 'mountainTexture', 'images/terrain2.jpg' ); 
 LoaderHelper.loadTexture( 'engineTexture', 'images/water.jpg' ); 
-//LoaderHelper.loadGeometry( 'shipGeometry', 'models/SpaceFighter03/SpaceFighter03.obj' ); 
