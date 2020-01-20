@@ -95,7 +95,7 @@ GPIO.add_event_detect(7, GPIO.RISING, callback=quietbutton_callback, bouncetime=
 GPIO.add_event_detect(18, GPIO.RISING, callback=nextbutton_callback, bouncetime=500)
 GPIO.add_event_detect(8, GPIO.RISING, callback=prevbutton_callback, bouncetime=500)
 
-message = input("Press enter to quitbegay")
+message = input("Press enter to quit")
 
 try:
     while True:
