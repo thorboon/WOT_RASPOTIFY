@@ -307,10 +307,10 @@ startgame = (i) => {
     var createInvaders = function(game) {
         var invaders = [];
         
-        for (var i=0; i<32; i++) {
+        for (var i=0; i<42; i++) {
             // amount
-            var x = 30 + (i % 16) * 18;
-            var y = 30 + (i % 2) * 12;
+            var x = 30 + (i % 14) * 18;
+            var y = 30 + (i % 3) * 12;
             invaders.push(new Invader(game, { x: x, y: y}, i));
         }
         
