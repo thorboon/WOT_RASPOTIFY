@@ -1,3 +1,4 @@
+startAnimate = () => {
 // all rights goes to https://codepen.io/rainner/pen/MqBVKo
 
 /**
@@ -261,3 +262,4 @@ const setupScene = () => {
 // init 
 LoaderHelper.onReady( setupScene );
 LoaderHelper.loadTexture( 'engineTexture', 'images/water.jpg' ); 
+};startAnimate();

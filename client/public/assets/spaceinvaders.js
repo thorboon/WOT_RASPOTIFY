@@ -12,6 +12,8 @@ startgame = (i) => {
         canvas.setAttribute('width', '400px')
         canvas.setAttribute('height', '300px')
         canvas.setAttribute('id', canvasId)
+        canvas.setAttribute('class', 'spaceInvaders')
+
         document.body.appendChild(canvas)
         
         let gameSize = {w: canvas.width, h: canvas.height }
@@ -333,6 +335,7 @@ startgame = (i) => {
     };
 
     start = (i) => {
+        document.getElementById('stageElement').remove()
         new Game(i);
         document.getElementById('score').style.visibility="visible"
     };
@@ -360,7 +363,9 @@ startgame = (i) => {
         score.style.visibility = "hidden"; 
         quit = true
         canvas.remove();
-        setQuit()
+        setQuit();
+        startAnimate();
+
     }
     countdeadalien = () => {
         deadaliens ++ 
@@ -378,7 +383,7 @@ startgame = (i) => {
 
     youwon = () => {
         let youwon = document.getElementById('youwon')
-        setTimeout(function(){canvas.style.visibility = "hidden";score.style.visibility = "hidden"; youwon.style.visibility = "visible" ; youwon.classList.add("fadein"); canvas.remove(); }, 1500);
+        setTimeout(function(){canvas.style.visibility = "hidden";score.style.visibility = "hidden"; youwon.style.visibility = "visible" ; youwon.classList.add("fadein"); canvas.remove();  }, 1500);
         setTimeout(function(){youwoncontinue.style.visibility = "visible" ;  youwoncontinue.classList.add("fadein");}, 2000)
     }
 
@@ -403,6 +408,7 @@ window.addEventListener('load', function () {
         console.log(i)
         console.log(gamestarted)
         console.log(diedonce)
+
         if (event.keyCode === 13 && !gamestarted && i < 1 && !diedonce) {
             
             console.log('enter')
@@ -411,9 +417,12 @@ window.addEventListener('load', function () {
           // Trigger the button element with a click
           button.click();
           
+          
         } if (event.keyCode === 13 && diedonce){
             i = 0 
             diedonce = false
+            startAnimate();
+
         }
       });
       
@@ -421,12 +430,14 @@ window.addEventListener('load', function () {
         console.log('setdied')
         gamestarted = false
         diedonce = true
+
       }
       
       setQuit = () => {
         console.log('setquit')
         gamestarted = false
         diedonce = true
+
       }
 
   })
