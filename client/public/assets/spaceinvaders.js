@@ -175,13 +175,12 @@ startgame = (i) => {
             }
             
             if (this.controls.isDown(this.controls.KEYS.LEFT)) {
-                if(this.position.x > 1 || this.position.x < 399){
+                if(this.position.x > 20){
                     this.position.x -=1;
                 }
                 
-                
             } else if (this.controls.isDown(this.controls.KEYS.RIGHT)) {
-                if(this.position.x > 1 || this.position.x < 399){
+                if(this.position.x < 380){
                     this.position.x += 1;
                 }
                 
