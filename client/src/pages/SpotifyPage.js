@@ -345,6 +345,7 @@ class SpotifyPage extends Component {
         <IconButton style={{color: 'white'}} onClick={()=> this.setQuiet()}>
         <VolumeDownIcon />
         </IconButton>
+        <span>{this.state.volume}</span>
         <IconButton style={{color: 'white'}} onClick={()=> this.setLouder()}>
         <VolumeUpIcon />
         </IconButton>
