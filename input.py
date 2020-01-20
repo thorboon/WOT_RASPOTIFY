@@ -26,7 +26,6 @@ GPIO.setup(17,GPIO.OUT)
 
 def upbutton_callback(channel):
    keyboard.press("z")
-   keyboard.release("z")
    GPIO.output(17,GPIO.HIGH)
    print('up')
     
@@ -35,6 +34,7 @@ def downbutton_callback(channel):
     keyboard.release('s')
     keyboard.release('d')
     keyboard.release('q')
+    keyboard.release('z')
     GPIO.output(17,GPIO.HIGH)
     print('down')
     
