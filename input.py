@@ -38,7 +38,6 @@ def downbutton_callback(channel):
     
 def leftbutton_callback(channel):
     keyboard.press("q")
-    keyboard.release("q")
     GPIO.output(17,GPIO.HIGH)
     print('left')
 
