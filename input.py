@@ -33,46 +33,55 @@ def upbutton_callback(channel):
 def downbutton_callback(channel):
     keyboard.press("s")
     keyboard.release("s")
+    GPIO.output(17,GPIO.HIGH)
     print('down')
     
 def leftbutton_callback(channel):
     keyboard.press("q")
     keyboard.release("q")
+    GPIO.output(17,GPIO.HIGH)
     print('left')
 
 def rightbutton_callback(channel):
     keyboard.press("d")
     keyboard.release("d")
+    GPIO.output(17,GPIO.HIGH)
     print('right')
     
 def enterbutton_callback(channel):
     keyboard.press("a")
     keyboard.release("a")
+    GPIO.output(17,GPIO.HIGH)
     print('enter')
 
 def playbutton_callback(channel):
     keyboard.press("e")
     keyboard.release("e")
+    GPIO.output(17,GPIO.HIGH)
     print('play')
 
 def louderbutton_callback(channel):
     keyboard.press("r")
     keyboard.release("r")
+    GPIO.output(17,GPIO.HIGH)
     print('louder')
 
 def quietbutton_callback(channel):
     keyboard.press("t")
     keyboard.release("t")
+    GPIO.output(17,GPIO.HIGH)
     print('quiet')
     
 def nextbutton_callback(channel):
     keyboard.press("y")
     keyboard.release("y")
+    GPIO.output(17,GPIO.HIGH)
     print('next')   
 
 def prevbutton_callback(channel):
     keyboard.press("u")
     keyboard.release("u")
+    GPIO.output(17,GPIO.HIGH)
     print('prev')   
           
 GPIO.add_event_detect(19, GPIO.RISING, callback=upbutton_callback, bouncetime=500)
