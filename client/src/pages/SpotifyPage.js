@@ -73,14 +73,16 @@ class SpotifyPage extends Component {
   }
   componentDidMount(){
       songRef.on('value', snapshot => {
-        let data = snapshot.val()      
+        let data = snapshot.val()  
+        console.log(data.title)    
         this.setState({
             title: data.title  
         })
+        console.log(this.state.title)
+        this.searchSong()
       })
         // Call this function so that it fetch first time right after mounting the component
         this.getNowPlaying()
-        this.searchSong()
 
 
         // set Interval
@@ -104,7 +106,7 @@ class SpotifyPage extends Component {
   
   searchSong = () => {
     console.log(this.state.title)
-      spotifyWebApi.searchTracks('this.state.title')
+      spotifyWebApi.searchTracks(this.state.title)
     .then(function(data) {
       console.log('Search tracks by "Love" in the artist name', data);
     }, function(err) {
