@@ -364,7 +364,6 @@ startgame = (i) => {
         quit = true
         canvas.remove();
         setQuit();
-        startAnimate();
 
     }
     countdeadalien = () => {
