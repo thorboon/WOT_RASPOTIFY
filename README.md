@@ -1,14 +1,15 @@
-# client -> react
-## cd client
-## npm install
-## yarn install
-## yarn start
+# Installation 
+## client -> react
+    cd client
+    npm install
+    yarn install
+    yarn start
 
 
-# auth-server
-## cd auth-server
-## npm build
-## npm install
+## auth-server
+    cd auth-server
+    npm build
+    npm install
 
 # Concept
 
