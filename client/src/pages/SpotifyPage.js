@@ -14,8 +14,24 @@ import PauseIcon from '@material-ui/icons/PauseCircleOutline';
 import 'react-toastify/dist/ReactToastify.css';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import shortid from 'shortid';
+import firebase from 'firebase';
 
 const spotifyWebApi = new Spotify()
+  // Initialize Firebase
+  var firebaseConfig = {
+    apiKey: "AIzaSyDIG7Rz9x19TBzzPIm9BIm1JKCtDGg3-Bw",
+    authDomain: "spotifypoll-e2607.firebaseapp.com",
+    databaseURL: "https://spotifypoll-e2607.firebaseio.com",
+    projectId: "spotifypoll-e2607",
+    storageBucket: "spotifypoll-e2607.appspot.com",
+    messagingSenderId: "268377467416",
+    appId: "1:268377467416:web:d2f46cf25be9002ee6716d",
+    measurementId: "G-JDHF1KSXNK"
+};
+firebase.initializeApp(firebaseConfig)
+let database = firebase.database()
+var songRef = database.ref('randomSong/randomItem');
+
 
 class SpotifyPage extends Component {
 
@@ -30,10 +46,10 @@ class SpotifyPage extends Component {
         artist: '',
         playing: false,
         duration: 0,
-        
         progress: 0,
       },
       name:'',
+      title:'',
       is_playing: false,
       progress_ms: 0,
       percentage: 90,
@@ -56,9 +72,16 @@ class SpotifyPage extends Component {
     
   }
   componentDidMount(){
-
+      songRef.on('value', snapshot => {
+        let data = snapshot.val()      
+        this.setState({
+            title: data.title  
+        })
+      })
         // Call this function so that it fetch first time right after mounting the component
         this.getNowPlaying()
+        this.searchSong()
+
 
         // set Interval
         this.interval = setInterval(this.getNowPlaying, 2000);
@@ -78,13 +101,23 @@ class SpotifyPage extends Component {
     }
     return hashParams;
   }
-
+  
+  searchSong = () => {
+    console.log(this.state.title)
+      spotifyWebApi.searchTracks('this.state.title')
+    .then(function(data) {
+      console.log('Search tracks by "Love" in the artist name', data);
+    }, function(err) {
+      console.error(err);
+    });
+    };
   
   getId = () => {
     const id = shortid.generate();
     console.log(id);
     return id;
   };
+
 
   getNowPlaying = () => {
     spotifyWebApi.getMyCurrentPlaybackState()
@@ -150,19 +183,9 @@ class SpotifyPage extends Component {
 
 
 
+
   // Your web app's Firebase configuration
-  //var firebaseConfig = {
-  //apiKey: "AIzaSyDIG7Rz9x19TBzzPIm9BIm1JKCtDGg3-Bw",
-  //  authDomain: "spotifypoll-e2607.firebaseapp.com",
-  //  databaseURL: "https://spotifypoll-e2607.firebaseio.com",
-  //  projectId: "spotifypoll-e2607",
-  //  storageBucket: "spotifypoll-e2607.appspot.com",
-  //  messagingSenderId: "268377467416",
-  //  appId: "1:268377467416:web:d2f46cf25be9002ee6716d",
-  //  measurementId: "G-JDHF1KSXNK"
-  //  };
-  // Initialize Firebase
-  // firebase.initializeApp(firebaseConfig);
+
 
 // query that must search for the song 
 // https://api.spotify.com/v1/search?q=this must be the artist&type=artist
