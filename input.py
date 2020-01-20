@@ -34,21 +34,20 @@ def downbutton_callback(channel):
     keyboard.release('s')
     keyboard.release('d')
     keyboard.release('q')
-    keyboard.release('z')
     GPIO.output(17,GPIO.HIGH)
     print('down')
     
 def leftbutton_callback(channel):
     keyboard.press("q")
     keyboard.release('d')
-    keyboard.release('z')
+    keyboard.release('s')
     GPIO.output(17,GPIO.HIGH)
     print('left')
 
 def rightbutton_callback(channel):
     keyboard.press("d")
     keyboard.release('q')
-    keyboard.release('z')
+    keyboard.release('s')
     GPIO.output(17,GPIO.HIGH)
     print('right')
     
