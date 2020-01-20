@@ -49,38 +49,38 @@ def rightbutton_callback(channel):
     print('right')
     
 def enterbutton_callback(channel):
-    keyboard.press("a")
-    keyboard.release("a")
+    keyboard.press(Key.enter)
+    keyboard.release(Key.enter)
     GPIO.output(17,GPIO.HIGH)
     print('enter')
 
 def playbutton_callback(channel):
-    keyboard.press("e")
-    keyboard.release("e")
+    keyboard.press(Key.space)
+    keyboard.release(Key.space)
     GPIO.output(17,GPIO.HIGH)
     print('play')
 
 def louderbutton_callback(channel):
-    keyboard.press("r")
-    keyboard.release("r")
+    keyboard.press(Key.up)
+    keyboard.release(Key.up)
     GPIO.output(17,GPIO.HIGH)
     print('louder')
 
 def quietbutton_callback(channel):
-    keyboard.press("t")
-    keyboard.release("t")
+    keyboard.press(Key.down)
+    keyboard.release(Key.down)
     GPIO.output(17,GPIO.HIGH)
     print('quiet')
     
 def nextbutton_callback(channel):
-    keyboard.press("y")
-    keyboard.release("y")
+    keyboard.press(Key.right)
+    keyboard.release(Key.right)
     GPIO.output(17,GPIO.HIGH)
     print('next')   
 
 def prevbutton_callback(channel):
-    keyboard.press("u")
-    keyboard.release("u")
+    keyboard.press(Key.left)
+    keyboard.release(Key.left)
     GPIO.output(17,GPIO.HIGH)
     print('prev')   
           
