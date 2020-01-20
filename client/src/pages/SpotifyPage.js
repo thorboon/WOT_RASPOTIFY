@@ -48,8 +48,14 @@ class SpotifyPage extends Component {
         duration: 0,
         progress: 0,
       },
+      randomSong: {
+        songtitle: '',
+        songArtist: '',
+        songImage: '',
+      },
       name:'',
-      title:'',
+      randomTitle:'',
+      randomArtist:'',
       is_playing: false,
       progress_ms: 0,
       percentage: 90,
@@ -62,24 +68,28 @@ class SpotifyPage extends Component {
     } 
   }
   componentWillMount(){
-    console.log(this.state.loggedIn)
     
     if(!this.state.loggedIn){
       window.location.href = 'http://localhost:8888/'
     }else{
-      console.log('loggedin')
+      // user is logged in play song now
     }
     
   }
   componentDidMount(){
       songRef.on('value', snapshot => {
-        let data = snapshot.val()  
-        console.log(data.title)    
-        this.setState({
-            title: data.title  
+        let data = snapshot.val()
+        if(data){
+          this.setState({
+            randomTitle: data.title,  
+            randomArtist: data.artist
         })
-        console.log(this.state.title)
-        this.searchSong()
+
+          this.searchSong()
+        } else {
+          // no song from poll
+        }   
+
       })
         // Call this function so that it fetch first time right after mounting the component
         this.getNowPlaying()
@@ -87,11 +97,6 @@ class SpotifyPage extends Component {
 
         // set Interval
         this.interval = setInterval(this.getNowPlaying, 2000);
-  }
-  handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
-      console.log('enter press here! ')
-    }
   }
 
   getHashParams = () => {
@@ -105,37 +110,41 @@ class SpotifyPage extends Component {
   }
   
   searchSong = () => {
-    console.log(this.state.title)
-      spotifyWebApi.searchTracks(this.state.title)
-    .then(function(data) {
-      console.log('Search tracks by "Love" in the artist name', data);
+      spotifyWebApi.searchTracks(this.state.randomTitle)
+    .then((data) => {
+      this.setState({
+        randomSong: {
+          songTitle: data.tracks.items[0].title,
+          songArtist:  data.tracks.items[0].artist,
+          songImage: data.tracks.items[0].image
+        }
+      })
+      this.playRandomSong(data.tracks.items[0].uri)
+      //this.getAudioFeaturesForTrack(data.tracks.items[0].uri)
     }, function(err) {
       console.error(err);
     });
     };
-  
-  getId = () => {
-    const id = shortid.generate();
-    console.log(id);
-    return id;
-  };
+
+    playRandomSong = (data) => {
+      let options =  {"uris": [data]}
+      spotifyWebApi.play(options)
+      .then()
+      .catch(err => console.log(err))
+    }
 
 
   getNowPlaying = () => {
     spotifyWebApi.getMyCurrentPlaybackState()
     .then((response) => {
-      //console.log(response)
-      console.log('song is playing?',response.is_playing)
       // if song is paused
       if(!response.is_playing){
-        console.log('song is pauzed')
         this.pauseSong()
       }else{
         if(this.state.name == response.item.name){
           // if same song don't do anything
           //setTimeout(function(){document.getElementById('title').classList.remove('anim-typewriter')}, 1500)
         }else{
-          console.log('not same song')
           //if not same song add animation
           document.getElementById('image').classList.add('fade-in')
           document.getElementById('title').classList.add('anim-typewriter')
@@ -164,106 +173,21 @@ class SpotifyPage extends Component {
           gotsong: true,
           is_playing: true,
         })
-        console.log('this.set', this.state.is_playing)
+        
         document.body.style.backgroundImage = `url('${this.state.nowPlaying.image}')`;
 
       }
-      //this.getPercentage(this.state.nowPlaying.duration, this.state.nowPlaying.progress)
+     
     }).catch((error)=> {
       console.log(error)
-      /*toast.error("Seems like you're not playing anything!", {
-        position: toast.POSITION.BOTTOM_CENTER
-      })*/
     })
     
   }
 
-//search Song
-//first connection with firebase
 
-//src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js">
-
-
-
-
-  // Your web app's Firebase configuration
-
-
-// query that must search for the song 
-// https://api.spotify.com/v1/search?q=this must be the artist&type=artist
-//curl -X "GET" "https://api.spotify.com/v1/search?q=tania%20bowra&type=artist" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer "
-
-
-
-
-/*
-  getPercentage(noemer,teller){
-    let percent = teller * 100 / noemer
-    this.setState({
-        percentage: percent
-      
-    })
-      console.log(this.state.percentage)
-      console.log(percent)
-      this.updateTrack(noemer)
-    
-    
-  }
-
-  updateTrack(noemer){
-    let myVar
-    // get sec
-    let noemersec = noemer / 1000
-    // clear interval before we start !doesntwork!
-    this.TryClearFuckingInterval(this.myVar)
-    // get procent per seconde
-    let noemersecpersec = 100 / noemersec
-    if(this.state.nowPlaying.playing){
-        functionClearInterval()
-        myVar = setInterval(()=> {
-        this.getPercentageUpdate(noemersecpersec)
-            // if songs is over clear interval !works!
-        if(!this.state.nowPlaying.playing || this.state.percentage > 99.999){
-          this.getNowPlaying()
-          functionClearInterval()
-        }
-        
-      }, 1000);
-   
-      function functionClearInterval(){
-          console.log(myVar)
-        clearInterval(myVar);
-        console.log("clearint")
-
-      }
-      
-      //clearInterval(i)
-    }else{
-        
-      //clearInterval(i)
-      // nothing playing 
-    }
-    
-  }
-TryClearFuckingInterval(interval){
-    console.log(interval)
-    clearInterval(interval)
-}
-
-  getPercentageUpdate(noemersecpersec){
-    console.log(this.state.percentage)
-    console.log('1')
-    let newpercent = this.state.percentage + noemersecpersec
-    this.setState({
-      percentage: newpercent
-    })
-  }
-*/
   skipSong = () => {
-    console.log(this.state.loggedIn)
     spotifyWebApi.skipToNext()
     .then((response) => {
-      //console.log(response)
       this.setState({
         skip: true
     })
@@ -278,7 +202,6 @@ TryClearFuckingInterval(interval){
   prevSong = () =>{
     spotifyWebApi.skipToPrevious()
     .then((response) => {
-      console.log(response)
       this.setState({
           skip: true
       })
@@ -296,30 +219,24 @@ TryClearFuckingInterval(interval){
     .then((respone) => {
       this.getNowPlaying()
     })
-    console.log(this.state.nowPlaying.playing)
   }
 
   pauseSong = () => {
-    console.log('pause function')
-    //console.log('state pause', this.state.is_playing)
     if(this.state.is_playing){
       spotifyWebApi.pause()
       .then(
         this.setState({
             is_playing: false
         }), 
-        console.log('state playing',this.state.is_playing)
-        //this.getNowPlaying()
       ).catch((error) => {
         console.log(error)
       })
     }else{
-      console.log('already paused')
+      // already paused
     }
   }
 
   setLouder = () => {
-    console.log(this.state.volume)
     let volume = this.state.volume + 10
     if(volume > 100){
       volume = 100
@@ -335,14 +252,12 @@ TryClearFuckingInterval(interval){
   }
 
   setQuiet = () => {
-    console.log(this.state.nowPlaying.volume)
     let volume = this.state.volume - 10
     if(volume < 0){
       volume = 0
     }
     spotifyWebApi.setVolume(volume)
     .then((respone) => {
-      console.log(respone)
       this.setState({
           volume: volume,  
       })
@@ -350,7 +265,6 @@ TryClearFuckingInterval(interval){
     })
   }
   playorpause = () => {
-    console.log(this.state.is_playing)
     if(this.state.is_playing){
       this.pauseSong()
     }else if(!this.state.is_playing){
@@ -359,7 +273,6 @@ TryClearFuckingInterval(interval){
   }
   
   startGame = () => {
-    console.log(this.state.playingGame)
     if(this.state.playingGame){
       this.setState({
         playingGame: false
@@ -384,7 +297,6 @@ TryClearFuckingInterval(interval){
 
   }
 
-  
   render(){
     return (
       <div>
